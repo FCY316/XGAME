@@ -1,0 +1,170 @@
+.home {
+  &_carousel {
+    box-sizing: border-box;
+    padding: 20px 16px 43px;
+    background-color: #141638;
+    &_banner{
+      width: 100%;
+      height: 122px;
+    }
+    &_hot {
+      padding-top: 28px;
+      &_title {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 400;
+        color: #fff;
+      }
+      &_btn {
+        display: block;
+        width: 146px;
+        height: 32px;
+        margin: 50px auto 0;
+        font-size: 14px;
+        color: #ffffff;
+        background: linear-gradient(90deg, #6856f3 -6%, #3e58e1 109%);
+        box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.07),
+          0px 0px 0px 0px rgba(255, 255, 255, 0.07),
+          inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
+          inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
+      }
+      .box {
+        position: relative;
+        width: 100%;
+        height: 169px;
+        /* 居中 */
+        left: 50%;
+        transform: translate(-50%, 10%);
+        .imgs {
+          position: absolute;
+          width: 38%;
+          height: 100%;
+          top: 0;
+          left: 50%;
+          transform: translate(-50%, 0%);
+          li {
+            list-style-type: none;
+            position: absolute;
+            width: 100%;
+            transition: 0.5s;
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #fff;
+            box-shadow: 1px #fff;
+            img {
+              cursor: pointer;
+              width: 100%;
+              height: 100%;
+              box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+            }
+          }
+          .one {
+            transform: translateX(-93%) scale(0.7);
+            z-index: 1;
+          }
+          .two {
+            transform: translateX(-46%) scale(0.9);
+            z-index: 2;
+          }
+          .three {
+            z-index: 3;
+          }
+          .four {
+            z-index: 2;
+            transform: translateX(46%) scale(0.9);
+          }
+          .five {
+            transform: translateX(93%) scale(0.7);
+            z-index: 1;
+          }
+          .six {
+            z-index: 0;
+            opacity: 0.8;
+            transform: scale(0.9);
+          }
+        }
+      }
+    }
+  }
+  &_country {
+    background: #0f003b;
+    color: #fff;
+    padding-bottom: 37px;
+    &_title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 17px;
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+    &_banner {
+      box-sizing: border-box;
+      margin: 21px 16px 31px;
+      height: 122px;
+      border-radius: 12px;
+      background: #8900d8;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &_btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      width: 148px;
+      height: 32px;
+      background: linear-gradient(90deg, #6856f3 -6%, #3e58e1 109%);
+      box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.07),
+        0px 0px 0px 0px rgba(255, 255, 255, 0.07),
+        inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
+        inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
+      img {
+        margin-left: 8px;
+        width: 17px;
+        height: 17px;
+      }
+    }
+  }
+  &_bg {
+    display: block;
+    background: #0f003b;
+    width: 100%;
+    height: 83px;
+    div {
+      width: 100%;
+      height: 100%;
+      background-image: url("../../image/homebg.png");
+      background-repeat: no-repeat;
+      background-position: top;
+      background-size: 180%;
+      padding-top: 100px;
+    }
+  }
+  &_partner {
+    background: #0f003b;
+    &_title {
+      text-align: center;
+      font-size: 22px;
+      background-image: -webkit-linear-gradient( right, #AC63FF, #798FFF, #7B9AFF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    &_img{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 44px 22px 42px;
+      img{
+        width: auto;
+        height: 28px;
+      }
+    }
+  }
+}

@@ -3,14 +3,26 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom'; //HashRouter
+import connectedWallet from '@/web3Hooks/useConnectedWallet';
+import { StyleProvider, legacyLogicalPropertiesTransformer } from '@ant-design/cssinjs';
+import newContracts from '@/web3Hooks/useNewContract';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BrowserRouter>
+    <connectedWallet.Provider initialState={undefined}>
+      <newContracts.Provider>
+        {/* ui 框架降级 */}
+        <StyleProvider transformers={[legacyLogicalPropertiesTransformer]}>
+          <App />
+        </StyleProvider>
+      </newContracts.Provider>
+    </connectedWallet.Provider>
+
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

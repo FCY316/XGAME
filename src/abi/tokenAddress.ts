@@ -1,0 +1,10 @@
+import { stringKey } from "@/interface";
+
+// 会改的合约
+export const tokenAddress: stringKey = {
+  WFIBO: "0x884A334A51b20883c9F14AD8de7438Fa2b2DD3DD",
+  MMT: "0x702bb82fd880D0FEdE02151Dd0ae0fE5938c1c4b",
+  NEST: "0xC7b58794B2806C49ED0c5bFd8B1470b06066EA08",
+  ADF: "0x4AA69efc685d75C5c490E6e89984890a4AF8844F",
+  VTT: "0xae21A2015b0909d1009F30dd7A0b8aC653E81d9f",
+};

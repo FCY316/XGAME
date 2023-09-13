@@ -1,0 +1,104 @@
+{
+    "slideshow": [
+        {
+            "imgUrl": "https://cdn.pixabay.com/photo/2017/03/12/11/30/alishan-2136879_640.jpg",
+            "href": "http://www.baidu.com"
+        },
+        {
+            "imgUrl": "https://cdn.pixabay.com/photo/2017/03/12/11/30/alishan-2136879_640.jpg",
+            "href": "http://www.baidu.com"
+        },
+        {
+            "imgUrl": "https://cdn.pixabay.com/photo/2017/03/12/11/30/alishan-2136879_640.jpg",
+            "href": "http://www.baidu.com"
+        },
+        {
+            "imgUrl": "https://cdn.pixabay.com/photo/2017/03/12/11/30/alishan-2136879_640.jpg",
+            "href": "http://www.baidu.com"
+        }
+    ],
+    "hot": [
+        {
+            "imgUrl": "https://cdn.pixabay.com/photo/2017/03/12/11/30/alishan-2136879_640.jpg",
+            "href": "http://www.baidu.com"
+        },
+        {
+            "imgUrl": "https://img95.699pic.com/photo/50136/1351.jpg_wh300.jpg",
+            "href": "http://www.baidu.com"
+        },
+        {
+            "imgUrl": "https://static.runoob.com/images/demo/demo2.jpg",
+            "href": "http://www.baidu.com"
+        },
+        {
+            "imgUrl": "https://pic1.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_720w.jpg?source=172ae18b",
+            "href": "http://www.baidu.com"
+        },
+        {
+            "imgUrl": "https://pic1.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_720w.jpg?source=172ae18b",
+            "href": "http://www.baidu.com"
+        },
+        {
+            "imgUrl": "https://pic1.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_720w.jpg?source=172ae18b",
+            "href": "http://www.baidu.com"
+        }
+    ],
+    "gameList": [
+        {
+            "gameImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "href": "http://www.baidu.com",
+            "userImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "userName": "小冯",
+            "context": "显文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本"
+        },
+        {
+            "gameImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "href": "http://www.baidu.com",
+            "userImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "userName": "小冯",
+            "context": "显文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本"
+        },
+        {
+            "gameImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "href": "http://www.baidu.com",
+            "userImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "userName": "小冯",
+            "context": "显文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本"
+        },
+        {
+            "gameImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "href": "http://www.baidu.com",
+            "userImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "userName": "小冯",
+            "context": "显文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本"
+        },
+        {
+            "gameImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "href": "http://www.baidu.com",
+            "userImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "userName": "小冯",
+            "context": "显文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本"
+        },
+        {
+            "gameImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "href": "http://www.baidu.com",
+            "userImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "userName": "小冯",
+            "context": "显文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本"
+        },
+        {
+            "gameImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "href": "http://www.baidu.com",
+            "userImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "userName": "小冯",
+            "context": "显文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本"
+        },
+        {
+            "gameImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "href": "http://www.baidu.com",
+            "userImg": "https://static.runoob.com/images/demo/demo2.jpg",
+            "userName": "小冯",
+            "context": "显文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本显示两行文本"
+        }
+    ]
+}

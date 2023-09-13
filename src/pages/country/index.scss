@@ -1,0 +1,118 @@
+.country {
+  background: linear-gradient(to bottom, #06093e, #151747);
+  padding: 20px 16px 50px;
+  &_tab {
+    transition: all 0.3s;
+    position: relative;
+    display: flex;
+    margin: auto;
+    width: 160px;
+    justify-content: space-between;
+    color: #8396e1;
+    font-size: 14px;
+    font-weight: 500;
+    .fontColor {
+      transition: all 0.3s;
+      color: #fff;
+    }
+    div {
+      cursor: pointer;
+    }
+    &_bo {
+      transition: all 0.3s;
+      position: absolute;
+      width: 39px;
+      height: 4px;
+      background-color: #3873f2;
+      bottom: -8px;
+      border-radius: 5px;
+      left: -6px;
+    }
+    .right {
+      left: 69%;
+    }
+  }
+  &_pledge {
+    &_banner {
+      margin-top: 24px;
+      height: 122px;
+      border-radius: 12px;
+      background: #453fbf;
+      border: 1px solid #7078e7;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &_showTab {
+      margin-top: 27px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .ant-segmented-item {
+        border-radius: 20px !important;
+      }
+      &_right {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        color: #ffffff;
+        &_switch {
+          background-color: #9197bc;
+          margin-right: 16px;
+        }
+        .ant-switch:hover {
+          background-color: #9197bc;
+        }
+      }
+    }
+    &_pool {
+      min-height: 300px;
+      padding-top: 26px;
+      &_item {
+        margin-bottom: 14px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  &_history {
+    &_tab {
+      padding-top: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      div {
+        span {
+          font-size: 12px;
+          font-weight: 500;
+          color: #e1e9fc;
+          padding-right: 10px;
+        }
+      }
+      &_select {
+        text-align: center;
+        width: 105px !important;
+
+        &_img {
+          width: 12px;
+          height: 8px;
+        }
+      }
+    }
+    &_context {
+      padding-top: 35px;
+      min-height: 300px;
+      &_item{
+        margin-bottom: 14px;
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  .ant-select-selection-item {
+    color: #3449a7;
+  }
+}
