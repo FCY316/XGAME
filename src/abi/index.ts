@@ -14,11 +14,11 @@ let contract: objKeyObjectType = {
 };
 if (process.env.NODE_ENV === "development") {
   //开发环境
-  contract.Pool.address = "0x3E15f71481Fc1b783A1EAE71367ae553d37cd499";
-  contract.erc20.address = tokenAddress["MMT"];
+  contract.Pool.address = "0x4a52E70F4020FAF0edcC4Ab01268B45e3AdeaEb3";
+  contract.erc20.address = tokenAddress["AWW"];
 } else {
   //生产环境
-  contract.Pool.address = "0x3E15f71481Fc1b783A1EAE71367ae553d37cd499";
-  contract.erc20.address = tokenAddress["MMT"];
+  contract.Pool.address = "0x4a52E70F4020FAF0edcC4Ab01268B45e3AdeaEb3";
+  contract.erc20.address = tokenAddress["AWW"];
 }
 export default contract;

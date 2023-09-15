@@ -66,7 +66,7 @@
     border-radius: 12px;
     background-color: #f4f6ff;
     box-sizing: border-box;
-    padding: 18px 18px 22px;
+    padding: 18px 18px 12px;
     &_item {
       display: flex;
       align-items: center;
@@ -81,12 +81,13 @@
         color: #838fca;
       }
       &_right {
-        font-size: 14px;
+        font-size: 10px;
+        color: #838fca;
         font-weight: 500;
-        color: #3e59c8;
+        text-align: right;
         span {
-          font-size: 10px;
-          color: #838fca;
+          color: #3e59c8;
+          font-size: 14px;
         }
       }
     }
@@ -143,6 +144,16 @@
         0px 0px 0px 0px rgba(255, 255, 255, 0.07),
         inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
         inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
+        text-align: center;
+        line-height:32px ;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    &_block {
+      text-align: center;
+      color: #3449a7;
+      font-size: 12px;
+      margin-top: 10px;
     }
   }
   &_Modal {
@@ -213,12 +224,8 @@
         }
         &_right {
           font-size: 14px;
-          font-weight: 500;
           color: #3e59c8;
-          span {
-            font-size: 10px;
-            color: #838fca;
-          }
+          font-weight: 500;
         }
       }
       &_btn2 {
@@ -269,7 +276,6 @@
           padding: 15px 18px;
           div {
             display: flex;
-            align-items: center;
             justify-content: space-between;
             padding-bottom: 9px;
             &:last-child {
@@ -287,6 +293,7 @@
             }
           }
         }
+
         .h0 {
           padding: 0;
           height: 0;

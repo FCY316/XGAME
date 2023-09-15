@@ -1,0 +1,109 @@
+.poolItem {
+  width: 100%;
+  border-radius: 12px;
+  box-sizing: border-box;
+  padding: 6px 0px 0 0px;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    #4c65e7 0%,
+    rgba(174, 187, 249, 0.73) 140%
+  );
+  &_tokenInfo {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 29px 17px 6px;
+    &_left {
+      display: flex;
+      align-items: center;
+      &_img {
+        position: relative;
+        margin-right: 15px;
+        img {
+          &:first-child {
+            width: 50px;
+            height: 50px;
+          }
+          &:last-child {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            bottom: 0;
+            right: 0;
+            transform: translate(25%, 0%);
+          }
+        }
+      }
+      &_text {
+        div {
+          &:first-child {
+            font-size: 16px;
+            font-weight: 500;
+            color: #ffffff;
+            padding-bottom: 5px;
+          }
+          &:last-child {
+            font-size: 12px;
+            color: #c5ccf3;
+          }
+        }
+      }
+    }
+    &_right {
+      font-size: 12px;
+      font-weight: 400;
+      color: #c5ccf3;
+      span {
+        font-weight: 500;
+        color: #ffffff;
+      }
+    }
+  }
+  &_earnings {
+    box-sizing: border-box;
+    padding: 29px 37px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    div {
+      font-weight: 500;
+      div {
+        text-align: center;
+        &:first-child {
+          font-size: 12px;
+          color: #d1d7f6;
+          padding-bottom: 11px;
+        }
+        &:last-child {
+          cursor: pointer;
+          font-size: 14px;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+  &_unfold {
+    cursor: pointer;
+    margin-top: 19px;
+    width: 100%;
+    height: 51px;
+    background: #a1adee;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      margin-left: 16px;
+      width: 15px;
+      height: auto;
+      transition: all 0.3s;
+    }
+    .img180 {
+      transform: rotate(180deg);
+    }
+  }
+}

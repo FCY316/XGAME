@@ -5,7 +5,8 @@ type gameListitem = {
     href: string,
     userImg: string,
     userName: string,
-    context: string
+    context: string,
+    color:string
 }
 const GameItem = (props: { item: gameListitem }) => {
     const { gameImg,
@@ -14,12 +15,12 @@ const GameItem = (props: { item: gameListitem }) => {
         userName,
         context } = props.item
     return (
-        <div className='gameItem'>
+        <div className='gameItem' >
             <div className='gameItem_img'>
                 <img src={gameImg} alt="" />
             </div>
             <div className='gameItem_user'>
-                <img src={userImg} alt="" />
+                <div className='gameItem_user_img'><img src={userImg} alt="" /></div>
                 {userName}
             </div>
             <div className='gameItem_text'>
@@ -27,7 +28,7 @@ const GameItem = (props: { item: gameListitem }) => {
             </div>
             <div className='gameItem_btn'>
                 <div onClick={() => {
-                    window.location.href = href
+                    window.open(href)
                 }}>
                     <span>探索</span>
                     <img src={rightarrow2} alt="" />

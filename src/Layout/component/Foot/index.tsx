@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import logo from '@/image/logo.png'
 import language from '@/image/language.png'
 import uparrow from '@/image/uparrow.png'
@@ -21,7 +21,7 @@ const Foot = () => {
   // 跳转
   const href = (url: string) => {
     return () => {
-      window.location.href = url
+      window.open(url)
     }
   }
   // 中英文
@@ -36,17 +36,18 @@ const Foot = () => {
       <div className='foot_link'>
         <div className='foot_link_left'>
           <div>关于</div>
-          <div>白皮书</div>
+          <div
+           onClick={href('https://docs.google.com/document/d/1eJRUiPl5IoJdqJ6dNzByf_N3upqx2wWxO__hofz2-yo/edit')}>白皮书</div>
 
         </div>
 
-        <Dropdown overlayClassName={'foot_link_right_item'} arrow={{ pointAtCenter: true }} menu={{ items, onClick }} placement="top" trigger={['click']}>
+        {/* <Dropdown overlayClassName={'foot_link_right_item'} arrow={{ pointAtCenter: true }} menu={{ items, onClick }} placement="top" trigger={['click']}>
           <div className='foot_link_right'>
             <img src={language} alt="" />
             <span>中文</span>
             <img src={uparrow} alt="" />
           </div>
-        </Dropdown>
+        </Dropdown> */}
       </div>
       <div className='foot_href'>
         <div> <img className='foot_href_T' src={T} alt='' /> </div>

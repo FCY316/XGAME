@@ -7,7 +7,7 @@ import rightarrow from '@/image/rightarrow.png'
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Carousels from "@/components/Carousels"
-const data = require('@/data.json')
+import { hot, country } from '@/data'
 type slideshowItemType = {
   imgUrl: string,
   href: string
@@ -20,26 +20,30 @@ const Home = () => {
   return (
     <div className="home">
       <div className="home_carousel">
-        <div className="home_carousel_banner">
-          <Carousels />
-        </div>
-        <div className="home_carousel_hot">
-          <div className="home_carousel_hot_title">🔥热门游戏</div>
-          <EmoCarousel></EmoCarousel>
-          <Button onClick={() => { navigate('/game') }} className="home_carousel_hot_btn" type="primary">查看更多</Button>
+        <div className="pc1200">
+          <div className="home_carousel_banner">
+            <Carousels />
+          </div>
+          <div className="home_carousel_hot">
+            <div className="home_carousel_hot_title">🔥热门游戏</div>
+            <EmoCarousel></EmoCarousel>
+            <Button onClick={() => { navigate('/game') }} className="home_carousel_hot_btn" type="primary">查看更多</Button>
+          </div>
         </div>
       </div>
       <div className="home_country">
+        <div className="pc1200">
         <div className="home_country_title">
           <span>农场</span>
           <img src={broccoli} alt="" />
         </div>
         <div className="home_country_banner">
-          <img src="https://static.runoob.com/images/demo/demo2.jpg" alt="" />
+          <img src={country.imgUrl} alt="" />
         </div>
         <Button onClick={() => { navigate('/country') }} className="home_country_btn" type="primary">
           <span>探索</span> <img src={rightarrow} alt="" />
         </Button>
+        </div>
       </div>
       <div className="home_bg">
         <div></div>
@@ -55,12 +59,15 @@ const Home = () => {
   )
 }
 const EmoCarousel = () => {
-  const { hot } = data
   const clsRef = useRef(['one', 'two', 'three', 'four', 'five', 'six'])
   const dotsRef = useRef(['change', '', '', ''])
-
   const [cls, setCls] = useState([''])
-
+  // 跳转
+  const href = (url: string) => {
+    return () => {
+      window.open(url)
+    }
+  }
   useEffect(() => {
     setCls([...clsRef.current])
     const time = setInterval(() => {
@@ -81,7 +88,7 @@ const EmoCarousel = () => {
     <div className="box">
       <ul className='imgs'>
         {hot.map((item: slideshowItemType, index: number) => {
-          return <li key={item.href + '' + index} className={cls[index]}>
+          return <li onClick={href(item.href)} key={item.href + '' + index} className={cls[index]}>
             <img src={item.imgUrl} alt="" />
           </li>
         })}

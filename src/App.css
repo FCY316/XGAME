@@ -1,4 +1,10 @@
+@font-face {
+  /* font-family: 'YourCustomFont';
+  src: url('./font/font.tiff'); */
+  /* 添加其他字体格式，如 woff、ttf，以增加兼容性 */
+}
 * {
+  /* font-family: 'YourCustomFont'; */
   padding: 0;
   margin: 0;
   list-style: none;

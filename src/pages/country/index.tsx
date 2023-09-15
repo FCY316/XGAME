@@ -10,14 +10,16 @@ import useApprove from '@/web3Hooks/useApprove'
 import useAuthorization from '@/web3Hooks/useAuthorization'
 import useGetBalance from '@/web3Hooks/useGetBalance'
 import useGetUserHistoryBill from '@/web3Hooks/useGetUserHistoryBill'
+import { country } from '@/data'
+import Sample from '@/components/Sample'
 const tab = ['农场', '历史账单']
 const boClass = ['country_tab_bo', 'country_tab_bo right']
-const cycleList = [
-  { value: 0, label: '全部' },
-  { value: 1, label: '500天线性释放' },
-  { value: 2, label: '300天线性释放' },
-  { value: 3, label: '300天' },
-]
+// const cycleList = [
+//   { value: 0, label: '全部' },
+//   { value: 1, label: '500天线性释放' },
+//   { value: 2, label: '300天线性释放' },
+//   { value: 3, label: '300天' },
+// ]
 const typeList = [
   { value: 0, label: '全部' },
   { value: 1, label: '质押' },
@@ -28,17 +30,17 @@ const Country = () => {
   // 提示
   const [api, contextHolder] = notification.useNotification();
   // tab选择选择的是农村还是历史账单
-  const [tabIndex, setTabIndex] = useState(1)
+  const [tabIndex, setTabIndex] = useState(0)
   // 判断是不是只显示我质押的
   const [showTime, setShowTime] = useState(false)
   // 锁仓周期
-  const [cycle, setCycle] = useState(0)
+  // const [cycle, setCycle] = useState(0)
   // 账单类型
   const [type, setType] = useState(0)
   // 获取锁仓周期的选择
-  const lockupCycle = (e: number) => {
-    setCycle(Number(e))
-  }
+  // const lockupCycle = (e: number) => {
+  //   setCycle(Number(e))
+  // }
   // 选择的的进行中还是结束
   const [timeState, setTimeState] = useState<number>(0)
   const timeover = (e: any) => {
@@ -54,7 +56,7 @@ const Country = () => {
   // 获取授权的方法
   const { approve, approveLod } = useApprove(api)
   // 获取池子的数量，通过池子的数量来遍历组件
-  const { poolQuantity, usedQuantity } = usePoolQuantity()
+  const { poolQuantity, usedQuantity, setUsedQuantity } = usePoolQuantity()
   // 获取用户的授权额度
   const { limit, usedLimit, setUsedLimit } = useAuthorization()
   // 获取所有的历史订单
@@ -67,15 +69,22 @@ const Country = () => {
         <PoolItem api={api} balance={balance || 0} usedBalance={usedBalance} setUsedBalance={setUsedBalance}
           showTime={showTime} timeState={timeState} limit={limit || 0} usedLimit={usedLimit} setUsedLimit={setUsedLimit} id={index} approve={approve} approveLod={approveLod} /></div>)
     }
+    data.push(<div key={'ww'} className='country_pledge_pool_item' ><Sample logo1='VTT' logo2='AWW' /></div>)
+    data.push(<div key={'cc'} className='country_pledge_pool_item' ><Sample logo1='ADF' logo2='AWW' /></div>)
+    data.push(<div key={'dd'} className='country_pledge_pool_item' ><Sample logo1='NEST' logo2='AWW' /></div>)
+
     return data
   }, [api, approve, approveLod, balance, limit, poolQuantity, setUsedBalance, setUsedLimit, showTime, timeState, usedBalance, usedLimit])
-
+  const setTab = (index: number) => {
+    index ? setUsedHistoryt() : setUsedQuantity()
+    setTabIndex(index)
+  }
   return (
     <div className='country'>
       {contextHolder}
       <div className='country_tab'>
         {tab.map((item: string, index: number) => {
-          return <div className={tabIndex === index ? 'fontColor' : ''} onClick={() => { setTabIndex(index) }} key={item}>
+          return <div className={tabIndex === index ? 'fontColor' : ''} onClick={() => { setTab(index) }} key={item}>
             {item}
           </div>
         })}
@@ -84,6 +93,7 @@ const Country = () => {
       {
         !!!tabIndex && <div className='country_pledge'>
           <div className='country_pledge_banner'>
+            <img src={country.imgUrl} alt="" />
           </div>
           <div className='country_pledge_showTab'>
             <ConfigProvider
@@ -119,7 +129,7 @@ const Country = () => {
             </div>
           </div>
           <div className='country_pledge_pool'>
-            {usedQuantity ? forPoolQuantity() : <SpinC />}
+            {usedQuantity ? <SpinC /> : forPoolQuantity()}
           </div>
         </div>
       }
@@ -139,7 +149,7 @@ const Country = () => {
               },
             }}>
             <div className='country_history_tab'>
-              <div>
+              {/* <div>
                 <span>锁仓周期</span>
                 <Select
                   style={{ color: "#3449A7" }}
@@ -152,7 +162,7 @@ const Country = () => {
                   onChange={lockupCycle}
                   options={cycleList}
                 />
-              </div>
+              </div> */}
               <div>
                 <span>账单类型</span>
                 <Select
@@ -171,7 +181,7 @@ const Country = () => {
             <div className='country_history_context'>
               {usedHistoryt ? <SpinC /> :
                 history.map((item, index) => {
-                  return <div key={index} className='country_history_context_item'><Bill setUsedHistoryt={setUsedHistoryt} api={api} item={item} /></div>
+                  return <div key={index} className='country_history_context_item'><Bill type={type} setUsedHistoryt={setUsedHistoryt} api={api} item={item} /></div>
                 })
               }
             </div>

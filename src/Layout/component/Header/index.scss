@@ -117,6 +117,9 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 29px;
+      &_span2{
+        display: none;
+      }
       img {
         width: 12px;
         height: 12px;
@@ -191,6 +194,21 @@
         height: 16px;
         margin-left: 3px;
         margin-right:4px;
+      }
+    }
+  }
+}
+@media screen and (min-width:780px) {
+  .header{
+    padding: 0 50px;
+    &_Modal {
+      &_address{
+        &_span1{
+          display: none;
+        }
+        &_span2 {
+          display: flex;
+        }
       }
     }
   }

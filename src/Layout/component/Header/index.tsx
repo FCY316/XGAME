@@ -74,7 +74,7 @@ const Header = () => {
   // 去区块浏览器
   const hrefs = (url: string) => {
     return () => {
-      window.location.href = url
+      window.open(url)
     }
   }
   // 菜单栏的结果
@@ -83,7 +83,7 @@ const Header = () => {
     if (key.startsWith("/")) {
       navigate(key)
     } else {
-      window.location.href = key
+      window.open(key)
     }
     onClose()
   };
@@ -91,9 +91,9 @@ const Header = () => {
     <nav className="header">
       <img className="header_logo" src={logo} alt="" />
       <div className="header_right">
-        <div className="header_right_language">
+        {/* <div className="header_right_language">
           <img src={language} alt="" />
-        </div>
+        </div> */}
         {address ? (
           <Button
             onClick={showModal}
@@ -140,7 +140,8 @@ const Header = () => {
         </div>
         <div className="header_Modal_name">钱包地址</div>
         <div className="header_Modal_address">
-          <span>{mobileHidden(addressConvert(address), 24, 3)}</span>
+          <span className="header_Modal_address_span1">{mobileHidden(addressConvert(address), 24, 3)}</span>
+          <span className="header_Modal_address_span2">{addressConvert(address)}</span>
           <img
             src={copy}
             onClick={() => {

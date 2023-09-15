@@ -24,8 +24,13 @@ const useGetUserHistoryBill = (id: number) => {
                 const list: any[] = []
                 for (let index = 0; index < id; index++) {
                     const res = await Pool.userInfo(index, address, 0)
-                    list.push(res)
-                    steDate({ ...data, history: list, usedHistoryt: false })
+                    if (Number(res.lockStartTime)) {
+                        list.push(res)
+                        steDate({ ...data, history: list, usedHistoryt: false })
+                    }
+                    if (list.length === 0 && id - 1 === index) {
+                        steDate({ ...data, usedHistoryt: false })
+                    }
                 }
             }
         } catch (e) {

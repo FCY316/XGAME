@@ -37,18 +37,48 @@ export function formatTimeToStr(
   // var s = (date.getSeconds() < 10 ? '0' + (date.getSeconds()) : date.getSeconds());
   return Y + M + D + h + m;
 }
+export function formatTimeToStr2(
+  times: any,
+  pattern1: any = "-",
+  pattern2: any = ":"
+) {
+  // 时间转换
+  var date = new Date(times); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+  var Y = date.getFullYear() + pattern1;
+  var M =
+    (date.getMonth() + 1 < 10
+      ? "0" + (date.getMonth() + 1)
+      : date.getMonth() + 1) + pattern1;
+  var D = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + " ";
+  return Y + M + D ;
+}
 // ，如果等于0那么就显示0，如果大于0就保留两位小数+..
 export const formatNumber = (value: string | number): string => {
-  value = value + "";
-  if (value === "0") {
-    return "0";
-  } else if (Number(value) > 0) {
-    const roundedValue = value.replace(/^(.*\..{2}).*$/, "$1");
-    return Number(value) > 0 ? `${roundedValue}..` : roundedValue;
-  } else {
-    return value.toString();
+  // 将输入值转换为字符串
+  const stringValue = String(value);
+
+  // 将字符串转换为数字，如果无法解析则返回原始字符串
+  const numericAmount = parseFloat(stringValue);
+
+  // 检查输入是否为有效的数字
+  if (isNaN(numericAmount)) {
+    return stringValue; // 如果无法解析为有效数字，则返回原始输入
   }
+  // 使用 toFixed 方法将小数位数限制为两位，然后转换为字符串
+  const formattedAmount = numericAmount.toFixed(2).toString();
+
+  // 使用正则表达式去除末尾多余的零和可能的小数点
+  const cleanedAmount = formattedAmount.replace(/(\.0*|0+)$/, "");
+
+  // 检查小数位数是否超过两位，如果超过，则添加省略号
+  const decimalCount = ((numericAmount + "").split(".")[1] || "").length;
+  if (decimalCount > 2) {
+    return cleanedAmount + "..";
+  }
+
+  return cleanedAmount;
 };
+
 // 地址转换
 export const addressConvert = (address: string) => {
   try {

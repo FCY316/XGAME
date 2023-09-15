@@ -1,6 +1,7 @@
 import React from 'react';
 import AppRouter from '@/router'
 import { ConfigProvider } from 'antd';
+
 import './App.css';
 // import "@/log/index";
 function App() {
@@ -12,7 +13,7 @@ function App() {
         theme={{
           components: {
             Button: {
-              colorPrimary: '#2901E8  ',
+              colorPrimary: '#2901E8',
               algorithm: true, // 启用算法
             },
             Modal: {

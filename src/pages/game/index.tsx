@@ -1,16 +1,16 @@
 import Carousels from '@/components/Carousels'
 import './index.scss'
 import GameItem from './components/GameItem'
-const data = require('@/data.json')
+import {gameList} from '@/data'
 type gameListitem = {
   gameImg: string,
   href: string,
   userImg: string,
   userName: string,
-  context: string
+  context: string,
+  color:string
 }
 const Game = () => {
-  const { gameList } = data
   return (
     <div className='game'>
       <div className='game_banner'>

@@ -1,25 +1,20 @@
 import './index.scss'
-import nest from '@/image/nest.png'
-import fibo from '@/image/fibo.png'
-import aww from '@/image/aww.png'
-import vtt from '@/image/vtt.png'
-import adf from '@/image/adf.png'
 import downarrow from '@/image/downarrow.png'
 import href2 from '@/image/href2.png'
 import scan from '@/image/scan.png'
 import closeIcon from '@/image/closeIcon.png'
-import { Button, ConfigProvider, Drawer, Input, Popover, Slider, Spin } from 'antd'
+import { Button, ConfigProvider, Drawer, Input, Popover, Slider, Spin, message } from 'antd'
 import { formatNumber, formatUnits } from '@/utils'
 import { ChangeEvent, useCallback, useState } from 'react'
 import { SliderMarks } from 'antd/es/slider'
 import usePoolInfo from '@/web3Hooks/usePoolInfo'
 import usePoolAmount from '@/web3Hooks/usePoolAmount'
 import useUserReward from '@/web3Hooks/useUserReward'
-import { stringKey } from '@/interface'
-import { tokenAddress } from '@/abi/tokenAddress'
+import { logoList, tokenAddress } from '@/abi/tokenAddress'
 import useGetblock from '@/web3Hooks/useGetblock'
 import useUserActivationPool from '@/web3Hooks/useUserActivationPool'
 import useDeposit from '@/web3Hooks/useDeposit'
+import { price } from '@/abi/tokenAddress'
 const marks: SliderMarks = {
     0: '0%',
     25: '25%',
@@ -27,15 +22,6 @@ const marks: SliderMarks = {
     75: '75%',
     100: '100%'
 };
-
-// logo
-const logoList: stringKey = {
-    WFIBO: fibo,
-    MMT: aww,
-    NEST: nest,
-    ADF: adf,
-    VTT: vtt
-}
 /*
  showTime 用户是否选择了仅显示我质押的 true选择了
  timeState 用户选择的进行中还是已经结束的 0 进行中
@@ -52,17 +38,17 @@ const logoList: stringKey = {
 */
 const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setUsedBalance: Function, showTime: boolean, timeState: number, id: number, approve: Function, approveLod: boolean, limit: number, usedLimit: boolean, setUsedLimit: Function }) => {
     const { api, showTime, id, approve, approveLod, limit, usedLimit, setUsedLimit, timeState, balance, usedBalance, setUsedBalance } = props
-
+    const [messageApi, contextHolder] = message.useMessage();
     // 控制侧边栏的参数
     const [open, setOpen] = useState(false);
     // 详情是否展开
     const [show, setShow] = useState(false)
     // 用户输入的质押的数量参数
-    const [num, setNum] = useState(0)
+    const [num, setNum] = useState('')
     // 去连接
     const go = (url: string) => {
         return () => {
-            window.location.href = url
+            window.open(url)
         }
     }
     // 打开侧边栏
@@ -75,15 +61,13 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
     };
     // 获取输入的数量质押
     const getNum = (e: ChangeEvent<HTMLInputElement>) => {
-        // 小于0的不处理
-        if (Number(e.target.value) < 0) return
-        setNum(Number(e.target.value))
+        setNum((e.target.value))
     }
     // 获取滑动的参数
     const getSlider = (e: number) => {
         // 使用余额乘以e /100
         const data = balance * (e / 100)
-        setNum(data)
+        setNum(data + '')
     }
     // 获取池子的信息
     const { poolInfo, usedPoolInfo, setUsedPoolInfo } = usePoolInfo(id)
@@ -97,7 +81,7 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
     // 获取是否对池中参与质押
     const { isPledge, setUsedIsPledge } = useUserActivationPool(id)
     // 质押的方法
-    const { deposit, depositLod } = useDeposit(api, id, num)
+    const { deposit, depositLod } = useDeposit(api, id, Number(num))
     // 对poolInfo,poolAmount里面是一些需要的可以转换的进行转换
     const setPoolInfo = useCallback(() => {
         if (poolInfo) {
@@ -105,19 +89,19 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
             const name = poolInfo.name.split(" => ");
             // 算出还有多少天
             const blocks = formatUnits(poolInfo.startBlock, 0) + formatUnits(poolInfo.totalBlock, 0) - (block || 0)
-            const blockTime = Math.ceil((blocks * 3.7) / 60 / 60 / 24)
+            const blockTime = Math.ceil((blocks * 3.78) / 60 / 60 / 24)
             // 算出池子的锁定时长
-            let timeQuantum = formatUnits(poolInfo.totalBlock, 0) + formatUnits(poolInfo.startBlock, 0)
+            let timeQuantum = formatUnits(poolInfo.totalBlock, 0) * 3.78
             timeQuantum = Math.ceil(timeQuantum / 60 / 60 / 24)
-            // 获取ARB
+            // 获取ARB price
             let arb = 0
             // poolAmount必须是数字，且不等于0 ，等于0算出的结果是无穷大
-            if (typeof poolAmount === 'number' && poolAmount) {
-                const amort = formatUnits(poolInfo.totalRewards) / blockTime
-                arb = amort / poolAmount
+            if (poolInfo && poolAmount) {
+                arb = (formatUnits(poolInfo.totalRewards) * price.FIBO) / (timeQuantum * 360) / poolAmount * price.AWW
                 arb = (arb / 100)
             }
-            return { name, arb, blockTime, timeQuantum }
+            const tvl = poolAmount ? poolAmount * price.AWW : 0
+            return { name, arb, blockTime, timeQuantum, tvl }
         }
     }, [poolInfo, block, poolAmount])
     // 刷新数据的方法
@@ -143,14 +127,17 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
     }
     // 质押
     const depositF = async () => {
+        setNum(Number(num) + '')
+        if (Number(num) <= 0) return messageApi.warning('质押金额需要大于0');
+        else if (Number(num) > balance) return messageApi.warning('质押金额大于余额');
         // 判断用户额度是否大于质押的参数 是的话授权，不是的话质押
-        if (num > limit) {
+        if (Number(num) > limit) {
             await approve()
             update()
         } else {
             await deposit()
             update()
-            setNum(0)
+            setNum('')
         }
     }
     // 判断块高是否到达 blockis是false达到了
@@ -205,15 +192,16 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
         <>
             {
                 showComponents() && <div className='poolItem'>
+                    {contextHolder}
                     <div className='poolItem_tokenInfo'>
                         <div className='poolItem_tokenInfo_left'>
                             <div className='poolItem_tokenInfo_left_img'>
-                                <img onClick={update} src={logoList[setPoolInfo()?.name[0] || 'Fibo']} alt="" />
-                                <img src={logoList[setPoolInfo()?.name[1] || 'Fibo']} alt="" />
+                                <img onClick={update} src={logoList[setPoolInfo()?.name[1] || 'Fibo']} alt="" />
+                                <img src={logoList[setPoolInfo()?.name[0] || 'Fibo']} alt="" />
                             </div>
                             <div className='poolItem_tokenInfo_left_text'>
-                                <div>赚取{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[0]}</div>
-                                <div>质押{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[1]}</div>
+                                <div>赚取{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[1]}</div>
+                                <div>质押{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[0]}</div>
                             </div>
                         </div>
                         <div className='poolItem_tokenInfo_right'>
@@ -235,8 +223,8 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
                         <div>
                             <div>TVL</div>
                             <div>
-                                <Popover content={`$${123.235141478451458}`}>
-                                    ${formatNumber(1.235141478451458)}
+                                <Popover content={`$${setPoolInfo()?.tvl || 0}`}>
+                                    ${formatNumber(setPoolInfo()?.tvl || 0)}
                                 </Popover>
                             </div>
                         </div>
@@ -290,7 +278,7 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
                             open={open}
                             title={
                                 <div className='poolItem_drawer_title'>
-                                    质押{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[1]}赚取{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[0]}
+                                    质押{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[0]}赚取{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[1]}
                                     <img
                                         onClick={onClose}
                                         src={closeIcon}
@@ -313,11 +301,11 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
                                 </div>
                             </div>
                             <div className='poolItem_drawer_input'>
-                                <Input value={num || ''} onChange={getNum} type='number' className='poolItem_drawer_input_input' placeholder="0.00" />
-                                <div onClick={() => { setNum(balance) }} className='poolItem_drawer_input_max'>MAX</div>
+                                <Input value={num} onChange={getNum} type='number' className='poolItem_drawer_input_input' placeholder="0.00" />
+                                <div onClick={() => { setNum(balance + '') }} className='poolItem_drawer_input_max'>MAX</div>
                             </div>
                             <Slider
-                                value={(num / balance) * 100}
+                                value={(Number(num) / balance) * 100}
                                 onChange={getSlider}
                                 railStyle={{ background: '#5A6CC4' }}
                                 trackStyle={{ background: "#EFF2FF" }}
@@ -339,13 +327,9 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
                                         <div>锁定时长</div>
                                         <div>{usedPoolInfo ? <Spin /> : setPoolInfo()?.timeQuantum} 天</div>
                                     </div>
-                                    <div>
-                                        <div>解锁日期</div>
-                                        <div>--</div>
-                                    </div>
                                 </div>
                             </div>
-                            <Button  loading={depositLod} onClick={depositF} className='poolItem_drawer_btn' type="primary">质押</Button>
+                            <Button loading={depositLod} onClick={depositF} className='poolItem_drawer_btn' type="primary">质押</Button>
 
                         </Drawer>
                     </ConfigProvider>
