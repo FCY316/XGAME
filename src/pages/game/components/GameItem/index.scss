@@ -51,7 +51,6 @@
     justify-content: right;
     padding-top: 25px;
     div {
-      cursor: pointer;
       box-sizing: border-box;
       width: 84px;
       height: 26px;
@@ -69,4 +68,14 @@
       }
     }
   }
+}
+@media screen and (min-width:780px) {
+  .gameItem{
+    &_btn{
+      div{
+        cursor: pointer;
+      }
+    }
+  }
+  
 }

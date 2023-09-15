@@ -41,13 +41,13 @@ const Foot = () => {
 
         </div>
 
-        {/* <Dropdown overlayClassName={'foot_link_right_item'} arrow={{ pointAtCenter: true }} menu={{ items, onClick }} placement="top" trigger={['click']}>
+        <Dropdown overlayClassName={'foot_link_right_item'} arrow={{ pointAtCenter: true }} menu={{ items, onClick }} placement="top" trigger={['click']}>
           <div className='foot_link_right'>
             <img src={language} alt="" />
             <span>中文</span>
             <img src={uparrow} alt="" />
           </div>
-        </Dropdown> */}
+        </Dropdown>
       </div>
       <div className='foot_href'>
         <div> <img className='foot_href_T' src={T} alt='' /> </div>

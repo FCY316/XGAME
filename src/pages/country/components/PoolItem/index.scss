@@ -4,6 +4,7 @@
   box-sizing: border-box;
   padding: 6px 0px 0 0px;
   overflow: hidden;
+  margin-bottom: 14px;
   background: linear-gradient(
     180deg,
     #4c65e7 0%,
@@ -76,7 +77,6 @@
           padding-bottom: 11px;
         }
         &:last-child {
-          cursor: pointer;
           font-size: 14px;
           color: #ffffff;
         }
@@ -84,7 +84,6 @@
     }
   }
   &_unfold {
-    cursor: pointer;
     margin-top: 19px;
     width: 100%;
     height: 51px;
@@ -107,7 +106,7 @@
     }
   }
   .bg {
-    border-top: 1px solid #AEBBF9;
+    border-top: 1px solid #aebbf9;
     background-color: transparent;
   }
   &_info {
@@ -145,7 +144,6 @@
       color: #5a6cb9;
       p {
         span {
-          cursor: pointer;
         }
         display: flex;
         align-items: center;
@@ -154,7 +152,6 @@
           padding-bottom: 7;
         }
         img {
-          cursor: pointer;
           margin-left: 8px;
           width: 13px;
           height: 13px;
@@ -240,7 +237,6 @@
         color: #3e59c8;
       }
       &_max {
-        cursor: pointer;
         position: absolute;
         right: 8px;
         top: 50%;
@@ -323,6 +319,62 @@
         0px 0px 0px 0px rgba(255, 255, 255, 0.07),
         inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
         inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
+    }
+  }
+}
+@media screen and (min-width: 780px) {
+  .poolItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding:0 0 0 30px ;
+    &_tokenInfo{
+      padding: 0 ;
+      align-items: center;
+      justify-content: space-between;
+      &_left{
+        padding-right: 70px;
+      }
+      &_right{
+        span{
+          cursor: pointer;
+        }
+      }
+    }
+    &_earnings{
+      padding: 0 ;
+      width: 300px;
+      div{
+        div{
+          &:last-child{
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    &_unfold {
+      display: none ;
+    }
+    &_info {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      width: 400px;
+      // 通过这个高度撑起poolItem整个盒子的高度
+      height: 100px;
+      &_start{
+        background-color: transparent;
+        p{
+          display: none;
+        }
+      }
+      &_token{
+        min-width: 120px;
+        p{
+          cursor: pointer;
+        }
+      }
     }
   }
 }

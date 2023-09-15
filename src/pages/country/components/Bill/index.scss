@@ -144,10 +144,9 @@
         0px 0px 0px 0px rgba(255, 255, 255, 0.07),
         inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
         inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
-        text-align: center;
-        line-height:32px ;
-        border-radius: 8px;
-        cursor: pointer;
+      text-align: center;
+      line-height: 32px;
+      border-radius: 8px;
     }
     &_block {
       text-align: center;
@@ -247,7 +246,6 @@
         border-top: 1px solid #d7ddf9;
 
         &_unfold {
-          cursor: pointer;
           width: 100%;
           box-sizing: border-box;
           font-size: 14px;
@@ -298,6 +296,46 @@
           padding: 0;
           height: 0;
         }
+      }
+    }
+  }
+}
+@media screen and (min-width: 780px) {
+  .bill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 10px 10px 0;
+    &_top {
+      width: 200px;
+      padding-bottom: 0;
+    }
+    &_context {
+      padding: 20px ;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      &_item{
+        padding-bottom: 0;
+        &_left{
+          min-width: 60px;
+        }
+        &_right{
+          text-align: left;
+          span{
+            cursor: pointer;
+          }
+        }
+      }
+      &_btn1{
+        float: right;
+        display: inline;
+        width: 100px;
+        margin: 0;
+      }
+      &_block{
+        margin: 0;
+        cursor: pointer;
       }
     }
   }

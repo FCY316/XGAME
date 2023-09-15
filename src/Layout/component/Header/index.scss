@@ -11,7 +11,6 @@
   &_logo {
     width: 77px;
     height: 20px;
-    cursor: pointer;
   }
   &_center {
     display: none;
@@ -20,7 +19,6 @@
     display: flex;
     align-items: center;
     &_language {
-      cursor: pointer;
       width: 32px;
       height: 32px;
       border: 2px solid #3052f4;
@@ -74,7 +72,6 @@
       }
     }
     &_menu {
-      cursor: pointer;
       width: 31px;
       height: 29px;
       img {
@@ -99,7 +96,6 @@
       img {
         width: 15px;
         height: 15px;
-        cursor: pointer;
       }
     }
     &_name {
@@ -126,7 +122,6 @@
       img {
         width: 12px;
         height: 12px;
-        cursor: pointer;
       }
     }
     &_btn {
@@ -203,6 +198,9 @@
 }
 @media screen and (min-width: 780px) {
   .header {
+    &_logo {
+      cursor: pointer;
+    }
     padding: 0 50px;
     &_center {
       display: flex;
@@ -228,12 +226,29 @@
       }
     }
     &_Modal {
+      &_title{
+        img{
+          cursor: pointer;
+        }
+      }
       &_address {
+        img{
+          cursor: pointer;
+
+        }
         &_span1 {
           display: none;
         }
         &_span2 {
           display: inline-block;
+        }
+      }
+      &_fiboscan{
+        span{
+          cursor: pointer;
+        }
+        img{
+          cursor: pointer;
         }
       }
     }

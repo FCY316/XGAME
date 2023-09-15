@@ -1,7 +1,6 @@
 import { memo, useState } from "react";
 import CounterContainer from "@/web3Hooks/useConnectedWallet";
 import logo from "@/image/logo.png";
-import language from "@/image/language.png";
 import menu from "@/image/menu.png";
 import downarrow from "@/image/downarrow.png";
 import walletimg from "@/image/walletimg.png";
@@ -65,8 +64,8 @@ const Header = () => {
   // 侧边栏的数据
   const items: MenuProps['items'] = [
     getItem('首页', '/', <img className='header_Drawer_Menu_img' src={pathname === '/' ? homesele : home} alt="" />),
-    getItem('游戏', '/game',<img className='header_Drawer_Menu_game' src={pathname === '/game' ? gamesele : game} alt="" />),
-    getItem('农场', '/country',<img className='header_Drawer_Menu_country' src={pathname === '/country' ? countrysele : country} alt="" />)
+    getItem('游戏', '/game', <img className='header_Drawer_Menu_game' src={pathname === '/game' ? gamesele : game} alt="" />),
+    getItem('农场', '/country', <img className='header_Drawer_Menu_country' src={pathname === '/country' ? countrysele : country} alt="" />)
     // getItem('NFT市场', 'http://www.baidu.com'),
     // getItem('社区', 'https://www.baidu.com'),
 
@@ -89,15 +88,12 @@ const Header = () => {
   };
   return (
     <nav className="header">
-      <img className="header_logo" src={logo} alt="" />
+      <img className="header_logo" onClick={() => { navigate('/') }} src={logo} alt="" />
       <div className="header_center">
-      <Menu className="header_center_Menu" 
-      onClick={onClick} selectedKeys={[pathname]} mode="horizontal" items={items} />
+        <Menu className="header_center_Menu"
+          onClick={onClick} selectedKeys={[pathname]} mode="horizontal" items={items} />
       </div>
       <div className="header_right">
-        {/* <div className="header_right_language">
-          <img src={language} alt="" />
-        </div> */}
         {address ? (
           <Button
             onClick={showModal}

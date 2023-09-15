@@ -30,7 +30,7 @@ const Country = () => {
   // 提示
   const [api, contextHolder] = notification.useNotification();
   // tab选择选择的是农村还是历史账单
-  const [tabIndex, setTabIndex] = useState(0)
+  const [tabIndex, setTabIndex] = useState(1)
   // 判断是不是只显示我质押的
   const [showTime, setShowTime] = useState(false)
   // 锁仓周期

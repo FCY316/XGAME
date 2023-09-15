@@ -16,7 +16,6 @@
       color: #fff;
     }
     div {
-      cursor: pointer;
     }
     &_bo {
       transition: all 0.3s;
@@ -69,12 +68,7 @@
     &_pool {
       min-height: 300px;
       padding-top: 26px;
-      &_item {
-        margin-bottom: 14px;
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
+
     }
   }
   &_history {
@@ -120,7 +114,19 @@
    .country{
     &_pc{
       width: 1200px;
+      height: calc(100vh - 349px);
       margin: auto
+    }
+    &_tab{
+      div{
+        cursor: pointer;
+      }
+    }
+    &_pledge{
+      &_banner{
+        height: 400px;
+
+      }
     }
    }
 }

@@ -14,11 +14,11 @@ let contract: objKeyObjectType = {
 };
 if (process.env.NODE_ENV === "development") {
   //开发环境
-  contract.Pool.address = "0x4a52E70F4020FAF0edcC4Ab01268B45e3AdeaEb3";
+  contract.Pool.address = "0x8905FE51a10cE3183538A725674CddAF35e9F4A4";
   contract.erc20.address = tokenAddress["AWW"];
 } else {
   //生产环境
-  contract.Pool.address = "0x4a52E70F4020FAF0edcC4Ab01268B45e3AdeaEb3";
+  contract.Pool.address = "0x8905FE51a10cE3183538A725674CddAF35e9F4A4";
   contract.erc20.address = tokenAddress["AWW"];
 }
 export default contract;

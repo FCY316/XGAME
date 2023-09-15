@@ -1,9 +1,10 @@
-.poolItem {
+.sample {
   width: 100%;
   border-radius: 12px;
   box-sizing: border-box;
   padding: 6px 0px 0 0px;
   overflow: hidden;
+  margin-bottom: 14px;
   background: linear-gradient(
     180deg,
     #4c65e7 0%,
@@ -76,7 +77,6 @@
           padding-bottom: 11px;
         }
         &:last-child {
-          cursor: pointer;
           font-size: 14px;
           color: #ffffff;
         }
@@ -84,7 +84,6 @@
     }
   }
   &_unfold {
-    cursor: pointer;
     margin-top: 19px;
     width: 100%;
     height: 51px;
@@ -104,6 +103,45 @@
     }
     .img180 {
       transform: rotate(180deg);
+    }
+  }
+}
+@media screen and (min-width: 780px) {
+  .sample {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 0 0 30px;
+    &_tokenInfo {
+      padding: 0;
+      align-items: center;
+      justify-content: space-between;
+      &_left {
+        padding-right: 70px;
+      }
+      &_right {
+        span {
+          cursor: pointer;
+        }
+      }
+    }
+    &_earnings {
+      padding: 0;
+      width: 300px;
+      div {
+        div {
+          &:last-child {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    &_unfold {
+      width: 400px;
+      // 通过这个高度撑起poolItem整个盒子的高度
+      height: 100px;
+      margin: 0;
     }
   }
 }

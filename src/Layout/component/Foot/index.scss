@@ -24,13 +24,11 @@
           font-size: 16px;
         }
         &:last-child {
-          cursor: pointer;
           padding: 0;
         }
       }
     }
     &_right {
-      cursor: pointer;
       width: 103px;
       height: 29px;
       border-radius: 31px;
@@ -58,7 +56,6 @@
   &_href {
     display: flex;
     div {
-      cursor: pointer;
       width: 38px;
       height: 38px;
       background: #7c7c7c;
@@ -89,6 +86,20 @@
     &_F {
       width: 12px;
       height: 22px;
+    }
+  }
+}
+@media screen and (min-width:780px) {
+  .foot {
+    &_link {
+      div{
+        cursor: pointer;
+      }
+    }
+    &_href{
+      div{
+        cursor: pointer;
+      }
     }
   }
 }
