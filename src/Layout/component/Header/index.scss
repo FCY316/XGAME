@@ -13,6 +13,9 @@
     height: 20px;
     cursor: pointer;
   }
+  &_center {
+    display: none;
+  }
   &_right {
     display: flex;
     align-items: center;
@@ -201,19 +204,37 @@
 @media screen and (min-width: 780px) {
   .header {
     padding: 0 50px;
+    &_center {
+      display: flex;
+      align-items: center;
+      width: 300px;
+      height: 100%;
+      &_Menu {
+        width: 100%;
+        background-color: transparent;
+        color: #fff;
+        .ant-menu-item-selected {
+          background: linear-gradient(
+            90deg,
+            #060b7c 0%,
+            rgba(26, 30, 43, 0) 138%
+          );
+        }
+      }
+    }
+    &_right {
+      &_menu {
+        display: none;
+      }
+    }
     &_Modal {
       &_address {
         &_span1 {
           display: none;
         }
         &_span2 {
-          display: flex;
+          display: inline-block;
         }
-      }
-    }
-    &_Drawer {
-      &_menu {
-        display: none;
       }
     }
   }

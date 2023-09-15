@@ -1,6 +1,6 @@
 .game {
   background: linear-gradient(to bottom, #06093e, #151747);
-  padding:  22px 0 35px 0 ;
+  padding: 22px 0 35px 0;
   &_banner {
     box-sizing: border-box;
     padding: 0px 16px 0;
@@ -25,6 +25,25 @@
         &:last-child {
           margin-right: 0;
         }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .game {
+    &_pc {
+      height: calc(100vh - 349px);
+      width: 1200px;
+      margin: auto;
+    }
+    &_banner {
+      height: 400px;
+    }
+    &_context {
+      padding-top: 70px;
+      &_list {
+        justify-content: center;
       }
     }
   }

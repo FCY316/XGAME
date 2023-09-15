@@ -116,3 +116,11 @@
     color: #3449a7;
   }
 }
+@media screen and (min-width:780px) {
+   .country{
+    &_pc{
+      width: 1200px;
+      margin: auto
+    }
+   }
+}

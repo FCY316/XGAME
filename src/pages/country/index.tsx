@@ -91,65 +91,68 @@ const Country = () => {
         <div className={boClass[tabIndex]}></div>
       </div>
       {
-        !!!tabIndex && <div className='country_pledge'>
-          <div className='country_pledge_banner'>
-            <img src={country.imgUrl} alt="" />
-          </div>
-          <div className='country_pledge_showTab'>
-            <ConfigProvider
-              theme={{
-                components: {
-                  Segmented: {
-                    itemColor: '#6165C2',
-                    itemSelectedBg: '#4C65E7',
-                    itemSelectedColor: '#fff',
-                    itemHoverColor: '#fff',
-                    colorBgLayout: '#D0D6F6',
-                    borderRadius: 20
-                  },
-                },
-              }}>
-              <Segmented
-                onChange={timeover}
-                options={options}
-              />
-            </ConfigProvider>
-            <div className='country_pledge_showTab_right'>
+        !!!tabIndex && <div className='country_pc'>
+          <div className='country_pledge'>
+            <div className='country_pledge_banner'>
+              <img src={country.imgUrl} alt="" />
+            </div>
+            <div className='country_pledge_showTab'>
               <ConfigProvider
                 theme={{
                   components: {
-                    Switch: {
-                      colorPrimaryHover: '#3951F1',
+                    Segmented: {
+                      itemColor: '#6165C2',
+                      itemSelectedBg: '#4C65E7',
+                      itemSelectedColor: '#fff',
+                      itemHoverColor: '#fff',
+                      colorBgLayout: '#D0D6F6',
+                      borderRadius: 20
                     },
                   },
                 }}>
-                <Switch className='country_pledge_showTab_right_switch' defaultChecked={showTime} onChange={(checked) => { setShowTime(checked) }} />
+                <Segmented
+                  onChange={timeover}
+                  options={options}
+                />
               </ConfigProvider>
-              <span>仅显示我质押的</span>
+              <div className='country_pledge_showTab_right'>
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      Switch: {
+                        colorPrimaryHover: '#3951F1',
+                      },
+                    },
+                  }}>
+                  <Switch className='country_pledge_showTab_right_switch' defaultChecked={showTime} onChange={(checked) => { setShowTime(checked) }} />
+                </ConfigProvider>
+                <span>仅显示我质押的</span>
+              </div>
             </div>
-          </div>
-          <div className='country_pledge_pool'>
-            {usedQuantity ? <SpinC /> : forPoolQuantity()}
+            <div className='country_pledge_pool'>
+              {usedQuantity ? <SpinC /> : forPoolQuantity()}
+            </div>
           </div>
         </div>
       }
       {
         !!tabIndex &&
-        <div className='country_history'>
-          < ConfigProvider
-            theme={{
-              components: {
-                Select: {
-                  optionSelectedColor: "#3449A7",
-                  optionFontSize: 12,
-                  optionPadding: '10px 0',
-                  selectorBg: '#EFF2FF',
-                  controlItemBgActive: "rgba(213, 220, 253, 1)",
+        <div className='country_pc'>
+          <div className='country_history'>
+            < ConfigProvider
+              theme={{
+                components: {
+                  Select: {
+                    optionSelectedColor: "#3449A7",
+                    optionFontSize: 12,
+                    optionPadding: '10px 0',
+                    selectorBg: '#EFF2FF',
+                    controlItemBgActive: "rgba(213, 220, 253, 1)",
+                  },
                 },
-              },
-            }}>
-            <div className='country_history_tab'>
-              {/* <div>
+              }}>
+              <div className='country_history_tab'>
+                {/* <div>
                 <span>锁仓周期</span>
                 <Select
                   style={{ color: "#3449A7" }}
@@ -163,29 +166,30 @@ const Country = () => {
                   options={cycleList}
                 />
               </div> */}
-              <div>
-                <span>账单类型</span>
-                <Select
-                  style={{ color: "#3449A7" }}
-                  dropdownStyle={{ textAlign: 'center', backgroundColor: "#EFF2FF" }}
-                  className={'country_history_tab_select'}
-                  suffixIcon={
-                    <img className='country_history_tab_select_img' src={bluebottom} alt="" />
-                  }
-                  value={typeList[type].value}
-                  onChange={getType}
-                  options={typeList}
-                />
+                <div>
+                  <span>账单类型</span>
+                  <Select
+                    style={{ color: "#3449A7" }}
+                    dropdownStyle={{ textAlign: 'center', backgroundColor: "#EFF2FF" }}
+                    className={'country_history_tab_select'}
+                    suffixIcon={
+                      <img className='country_history_tab_select_img' src={bluebottom} alt="" />
+                    }
+                    value={typeList[type].value}
+                    onChange={getType}
+                    options={typeList}
+                  />
+                </div>
               </div>
-            </div>
-            <div className='country_history_context'>
-              {usedHistoryt ? <SpinC /> :
-                history.map((item, index) => {
-                  return <div key={index} className='country_history_context_item'><Bill type={type} setUsedHistoryt={setUsedHistoryt} api={api} item={item} /></div>
-                })
-              }
-            </div>
-          </ConfigProvider>
+              <div className='country_history_context'>
+                {usedHistoryt ? <SpinC /> :
+                  history.map((item, index) => {
+                    return <div key={index} className='country_history_context_item'><Bill type={type} setUsedHistoryt={setUsedHistoryt} api={api} item={item} /></div>
+                  })
+                }
+              </div>
+            </ConfigProvider>
+          </div>
         </div>
       }
     </div >

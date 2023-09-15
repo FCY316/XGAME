@@ -90,6 +90,10 @@ const Header = () => {
   return (
     <nav className="header">
       <img className="header_logo" src={logo} alt="" />
+      <div className="header_center">
+      <Menu className="header_center_Menu" 
+      onClick={onClick} selectedKeys={[pathname]} mode="horizontal" items={items} />
+      </div>
       <div className="header_right">
         {/* <div className="header_right_language">
           <img src={language} alt="" />
