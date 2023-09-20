@@ -32,7 +32,7 @@
       }
     }
     &_connect {
-      width: 96px;
+      box-sizing: border-box;
       height: 32px;
       border-radius: 20px;
       text-align: center;
@@ -40,12 +40,7 @@
       color: #fff;
       font-size: 14px;
       margin: 0 18px 0 23px;
-      padding: 0;
-      background: linear-gradient(90deg, #6856f3 -6%, #3e58e1 109%);
-      box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-        0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-        inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
-        inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
+      padding: 0 20px;
     }
     &_connected {
       width: 85px;
@@ -56,11 +51,6 @@
       border-radius: 20px;
       justify-content: space-between;
       padding: 0 17px;
-      background: linear-gradient(90deg, #6856f3 -6%, #3e58e1 109%);
-      box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-        0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-        inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
-        inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
       &_wallet {
         width: 20px;
         height: 20px;
@@ -129,11 +119,6 @@
       margin: 0 auto 9px;
       width: 208px;
       height: 32px;
-      background: linear-gradient(90deg, #6856f3 -6%, #3e58e1 109%);
-      box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-        0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-        inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
-        inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
     }
     &_fiboscan {
       font-size: 12px;
@@ -205,18 +190,18 @@
     &_center {
       display: flex;
       align-items: center;
-      width: 300px;
+      position: fixed;
+      top: 0;
+      left: 150px;
       height: 100%;
+      min-width: 310px;
       &_Menu {
         width: 100%;
         background-color: transparent;
-        color: #fff;
+        color: #fff !important;
+
         .ant-menu-item-selected {
-          background: linear-gradient(
-            90deg,
-            #060b7c 0%,
-            rgba(26, 30, 43, 0) 138%
-          );
+          background: transparent;
         }
       }
     }
@@ -226,15 +211,14 @@
       }
     }
     &_Modal {
-      &_title{
-        img{
+      &_title {
+        img {
           cursor: pointer;
         }
       }
       &_address {
-        img{
+        img {
           cursor: pointer;
-
         }
         &_span1 {
           display: none;
@@ -243,14 +227,15 @@
           display: inline-block;
         }
       }
-      &_fiboscan{
-        span{
+      &_fiboscan {
+        span {
           cursor: pointer;
         }
-        img{
+        img {
           cursor: pointer;
         }
       }
     }
   }
+ 
 }

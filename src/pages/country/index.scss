@@ -68,7 +68,6 @@
     &_pool {
       min-height: 300px;
       padding-top: 26px;
-
     }
   }
   &_history {
@@ -98,9 +97,9 @@
     &_context {
       padding-top: 35px;
       min-height: 300px;
-      &_item{
+      &_item {
         margin-bottom: 14px;
-        &:last-child{
+        &:last-child {
           margin-bottom: 0;
         }
       }
@@ -110,23 +109,22 @@
     color: #3449a7;
   }
 }
-@media screen and (min-width:780px) {
-   .country{
-    &_pc{
+@media screen and (min-width: 780px) {
+  .country {
+    &_pc {
       width: 1200px;
-      height: calc(100vh - 349px);
-      margin: auto
+      min-height: calc(100vh - 349px);
+      margin: auto;
     }
-    &_tab{
-      div{
+    &_tab {
+      div {
         cursor: pointer;
       }
     }
-    &_pledge{
-      &_banner{
+    &_pledge {
+      &_banner {
         height: 400px;
-
       }
     }
-   }
+  }
 }

@@ -19,7 +19,7 @@ const useAuthorization = () => {
     const { erc20 } = newContracts.useContainer();
     // 获取用户地址
     const { address } = CounterContainer.useContainer();
-    // 获取指定池的信息的方法
+    // 获取授权额度的方法
     const getAuthorization = useCallback(async () => {
         try {
             // 我希望id是number 和 有pool的时候使用

@@ -2,8 +2,8 @@ import { ethers } from "ethers";
 import { Buffer } from "buffer";
 import blockies from "ethereum-blockies";
 import { message } from "antd";
+import { t } from "i18next";
 var fibo = require("bech32");
-
 // 将BigNumber 转换为普通数(数字类型)
 export const formatUnits = (value: string | number, decimals: number = 18) => {
   const result = ethers.formatUnits(value, decimals);
@@ -197,8 +197,8 @@ export const handleCopyClick = (data: string | number) => {
     textField.select();
     document.execCommand("copy");
     textField.remove();
-    message.success("复制成功");
+    message.success(t('foot.replicationFailure'));
   } catch (e) {
-    message.error("复制失败");
+    message.error(t('foot.replicationFailure'));
   }
 };

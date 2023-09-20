@@ -1,10 +1,4 @@
-@font-face {
-  /* font-family: 'YourCustomFont';
-  src: url('./font/font.tiff'); */
-  /* 添加其他字体格式，如 woff、ttf，以增加兼容性 */
-}
 * {
-  /* font-family: 'YourCustomFont'; */
   padding: 0;
   margin: 0;
   list-style: none;
@@ -13,3 +7,13 @@
 /* div {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 } */
+.btn {
+  background: linear-gradient(90deg, #6856f3 -6%, #3e58e1 109%);
+  box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.07),
+    0px 0px 0px 0px rgba(255, 255, 255, 0.07),
+    inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
+    inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
+}
+.btn:hover {
+  background: linear-gradient(90deg, #522ab5 -10%, #1e35b0 103%);
+}

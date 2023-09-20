@@ -21,12 +21,6 @@
         height: 32px;
         margin: 50px auto 0;
         font-size: 14px;
-        color: #ffffff;
-        background: linear-gradient(90deg, #6856f3 -6%, #3e58e1 109%);
-        box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-          0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-          inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
-          inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
       }
       .box {
         position: relative;
@@ -119,11 +113,6 @@
       margin: auto;
       width: 148px;
       height: 32px;
-      background: linear-gradient(90deg, #6856f3 -6%, #3e58e1 109%);
-      box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-        0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-        inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
-        inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
       img {
         margin-left: 8px;
         width: 17px;
@@ -151,14 +140,17 @@
     &_title {
       text-align: center;
       font-size: 22px;
-      background-image: -webkit-linear-gradient(
-        right,
-        #ac63ff,
-        #798fff,
-        #7b9aff
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      margin: auto;
+      span {
+        background-image: -webkit-linear-gradient(
+          right,
+          #ac63ff,
+          #798fff,
+          #7b9aff
+        );
+        color: transparent;
+        -webkit-background-clip: text;
+      }
     }
     &_img {
       display: flex;
@@ -185,6 +177,7 @@
       }
       &_hot {
         &_title {
+          padding-top: 30px;
           text-align: center;
           font-size: 22px;
           font-weight: 400;
@@ -212,6 +205,8 @@
         }
       }
       &_banner {
+        margin-top: 50px;
+        margin-bottom: 50px;
         height: 400px;
       }
       &_btn {
@@ -245,10 +240,10 @@
         justify-content: center;
         padding: 44px 22px 42px;
         img {
-          margin-left: 30px;
+          margin-left: 200px;
           width: auto;
           height: 66px;
-          &:first-child{
+          &:first-child {
             margin-left: 0;
           }
         }

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import './index.scss'
 import rightarrow2 from '@/image/rightarrow2.png'
 type gameListitem = {
@@ -6,7 +7,7 @@ type gameListitem = {
     userImg: string,
     userName: string,
     context: string,
-    color:string
+    color: string
 }
 const GameItem = (props: { item: gameListitem }) => {
     const { gameImg,
@@ -14,6 +15,8 @@ const GameItem = (props: { item: gameListitem }) => {
         userImg,
         userName,
         context } = props.item
+    // 翻译
+    const { t } = useTranslation()
     return (
         <div className='gameItem' >
             <div className='gameItem_img'>
@@ -30,7 +33,7 @@ const GameItem = (props: { item: gameListitem }) => {
                 <div onClick={() => {
                     window.open(href)
                 }}>
-                    <span>探索</span>
+                    <span>{t('game.explore')}</span>
                     <img src={rightarrow2} alt="" />
                 </div>
             </div>

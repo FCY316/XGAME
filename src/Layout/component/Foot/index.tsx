@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '@/image/logo.png'
 import language from '@/image/language.png'
 import uparrow from '@/image/uparrow.png'
@@ -8,9 +8,10 @@ import X from '@/image/X.png'
 import D from '@/image/D.png'
 import './index.scss'
 import { Dropdown, MenuProps } from 'antd'
+import { useTranslation } from 'react-i18next'
 const items: MenuProps['items'] = [
   {
-    key: 'zn',
+    key: 'cn',
     label: '中文',
   }, {
     key: 'en',
@@ -18,6 +19,10 @@ const items: MenuProps['items'] = [
   },
 ];
 const Foot = () => {
+  // 选择的语言
+  const [languages,setLanguage] = useState('中文')
+  // 翻译
+  const { t, i18n } = useTranslation();
   // 跳转
   const href = (url: string) => {
     return () => {
@@ -26,7 +31,9 @@ const Foot = () => {
   }
   // 中英文
   const onClick: MenuProps['onClick'] = ({ key }) => {
-    console.log(`Click on item ${key}`);
+    i18n.changeLanguage(key)
+    const data = key === 'cn' ? '中文':'英文'
+    setLanguage(data)
   };
   return (
     <div className='foot'>
@@ -35,16 +42,16 @@ const Foot = () => {
       </div>
       <div className='foot_link'>
         <div className='foot_link_left'>
-          <div>关于</div>
+          <div>{t('foot.about')}</div>
           <div
-           onClick={href('https://docs.google.com/document/d/1eJRUiPl5IoJdqJ6dNzByf_N3upqx2wWxO__hofz2-yo/edit')}>白皮书</div>
+            onClick={href('https://docs.google.com/document/d/1eJRUiPl5IoJdqJ6dNzByf_N3upqx2wWxO__hofz2-yo/edit')}>{t('foot.whitePaper')}</div>
 
         </div>
 
         <Dropdown overlayClassName={'foot_link_right_item'} arrow={{ pointAtCenter: true }} menu={{ items, onClick }} placement="top" trigger={['click']}>
           <div className='foot_link_right'>
             <img src={language} alt="" />
-            <span>中文</span>
+            <span>{languages}</span>
             <img src={uparrow} alt="" />
           </div>
         </Dropdown>

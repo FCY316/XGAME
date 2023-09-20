@@ -1,9 +1,9 @@
 import { stringKey } from "@/interface";
-import nest from '@/image/nest.png'
-import fibo from '@/image/fibo.png'
-import aww from '@/image/aww.png'
-import vtt from '@/image/vtt.png'
-import adf from '@/image/adf.png'
+import nest from "@/image/nest.png";
+import fibo from "@/image/fibo.png";
+import aww from "@/image/aww.png";
+import vtt from "@/image/vtt.png";
+import adf from "@/image/adf.png";
 // 会改的合约
 export const tokenAddress: stringKey = {
   FIBO: "",
@@ -18,9 +18,10 @@ export const logoList: stringKey = {
   AWW: aww,
   NEST: nest,
   ADF: adf,
-  VTT: vtt
-}
-export const price = {
-  FIBO:1.7,
-  AWW:80
-}
+  VTT: vtt,
+};
+export const getPriceAddress = {
+  tokenInAddressAWW: "0x9014d93437b537481f9df5c72eb7e9d84869c0f4", // 输入代币地址AWW
+  tokenInAddressWFIBO: "0x3fD726773f40f80657B9f3Ce32e68eB59C11f1fB", // 输入代币地址FIBO
+  tokenOutAddressUSDT: "0xaf9455e943797928be2d6cbb010b96d662d2c35e", // 输出代币地址USDT
+};

@@ -13,10 +13,11 @@ import game from "@/image/game.png";
 import gamesele from "@/image/gamesele.png";
 import country from "@/image/country.png";
 import countrysele from "@/image/countrysele.png";
-import { Button, Drawer, Menu, MenuProps, Modal } from "antd";
+import { Button, ConfigProvider, Drawer, Menu, MenuProps, Modal } from "antd";
 import { addressConvert, handleCopyClick, mobileHidden } from '@/utils/index'
 import "./index.scss";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 type MenuItem = Required<MenuProps>['items'][number];
 function getItem(
   label: React.ReactNode,
@@ -35,6 +36,8 @@ function getItem(
 }
 
 const Header = () => {
+  // 翻译
+  const { t } = useTranslation()
   // 获取当前的路由路径用于判断选中的menu
   const { pathname } = useLocation()
   // 路由
@@ -63,9 +66,9 @@ const Header = () => {
   };
   // 侧边栏的数据
   const items: MenuProps['items'] = [
-    getItem('首页', '/', <img className='header_Drawer_Menu_img' src={pathname === '/' ? homesele : home} alt="" />),
-    getItem('游戏', '/game', <img className='header_Drawer_Menu_game' src={pathname === '/game' ? gamesele : game} alt="" />),
-    getItem('农场', '/country', <img className='header_Drawer_Menu_country' src={pathname === '/country' ? countrysele : country} alt="" />)
+    getItem(t('header.home'), '/', <img className='header_Drawer_Menu_img' src={pathname === '/' ? homesele : home} alt="" />),
+    getItem(t('header.game'), '/game', <img className='header_Drawer_Menu_game' src={pathname === '/game' ? gamesele : game} alt="" />),
+    getItem(t('header.farm'), '/country', <img className='header_Drawer_Menu_country' src={pathname === '/country' ? countrysele : country} alt="" />)
     // getItem('NFT市场', 'http://www.baidu.com'),
     // getItem('社区', 'https://www.baidu.com'),
 
@@ -90,15 +93,24 @@ const Header = () => {
     <nav className="header">
       <img className="header_logo" onClick={() => { navigate('/') }} src={logo} alt="" />
       <div className="header_center">
-        <Menu className="header_center_Menu"
-          onClick={onClick} selectedKeys={[pathname]} mode="horizontal" items={items} />
+        <ConfigProvider
+          theme={{
+            components: {
+              Menu: {
+                itemHoverColor: "#ffffff",
+              },
+            },
+          }}>
+          <Menu className="header_center_Menu"
+            onClick={onClick} selectedKeys={[pathname]} mode="horizontal" items={items} />
+        </ConfigProvider>
       </div>
       <div className="header_right">
         {address ? (
           <Button
             onClick={showModal}
             type="primary"
-            className="header_right_connected"
+            className="header_right_connected btn"
           >
             <img
               className="header_right_connected_wallet"
@@ -112,8 +124,8 @@ const Header = () => {
             />
           </Button>
         ) : (
-          <Button type="primary" onClick={() => connected()} className="header_right_connect">
-            连接钱包
+          <Button type="primary" onClick={() => connected()} className="header_right_connect btn">
+            {t('header.connectedWallet')}
           </Button>
         )}
         <div className="header_right_menu" onClick={showDrawer}>
@@ -135,10 +147,11 @@ const Header = () => {
         }}
       >
         <div className="header_Modal_title">
-          <span>我的钱包</span>{" "}
+          <span>{t('header.myWallet')}
+          </span>
           <img onClick={handleOk} src={closeIcon} alt="" />
         </div>
-        <div className="header_Modal_name">钱包地址</div>
+        <div className="header_Modal_name">{t('header.walletAddress')}</div>
         <div className="header_Modal_address">
           <span className="header_Modal_address_span1">{mobileHidden(addressConvert(address), 24, 3)}</span>
           <span className="header_Modal_address_span2">{addressConvert(address)}</span>
@@ -150,10 +163,10 @@ const Header = () => {
             alt=""
           />
         </div>
-        <Button className="header_Modal_btn" onClick={() => {
+        <Button className="header_Modal_btn btn" onClick={() => {
           breaks(); handleOk();
         }} type="primary">
-          退出钱包
+          {t('header.exitWallet')}
         </Button>
         <div className="header_Modal_fiboscan" >
           <span onClick={hrefs('https://scan.fibochain.org/')}>View on fiboscan</span>
@@ -176,6 +189,7 @@ const Header = () => {
           />
         }
         placement="right" onClose={onClose} open={open}>
+
         <Menu
           className="header_Drawer_Menu"
           onClick={onClick}

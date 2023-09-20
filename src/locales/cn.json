@@ -1,0 +1,76 @@
+{
+    "foot": {
+        "about": "关于",
+        "whitePaper": "白皮书",
+        "successfulReplication": "复制成功",
+        "replicationFailure": "复制失败"
+    },
+    "header": {
+        "home": "首页",
+        "game": "游戏",
+        "farm": "农场",
+        "connectedWallet": "连接钱包",
+        "myWallet": "我的钱包",
+        "walletAddress": "钱包地址",
+        "exitWallet": "退出钱包"
+    },
+    "home": {
+        "hotGame": "热门游戏",
+        "viewMore": "查看更多",
+        "farm": "农场",
+        "explore": "探索",
+        "partner": "合作伙伴"
+    },
+    "game": {
+        "game": "游戏",
+        "explore": "探索"
+    },
+    "country": {
+        "farm": "农场",
+        "hob": "历史账单",
+        "all": "全部",
+        "pledge": "质押",
+        "redeem": "赎回",
+        "underway": "进行中",
+        "finished": "已结束",
+        "iPledgedIt": "仅显示我质押的",
+        "billType": "账单类型",
+        "theAmountPledgedMustBeGreaterThan0": "质押金额需要大于0",
+        "theAmountPledgedIsGreaterThanTheBalance": "质押金额大于余额",
+        "earn": "赚取",
+        "earned": "已赚取",
+        "endCountdown": "结束倒计时",
+        "day": "天",
+        "alreadyOver": "已经结束",
+        "info": "详情",
+        "startMining": "开始挖矿",
+        "startUsing": "启用",
+        "viewTokenInformation": "查看代币信息",
+        "viewContract": "查看合约",
+        "balance": "余额",
+        "lockupCycle": "锁仓周期",
+        "overviewOfLockers": "锁仓概览",
+        "lockDuration": "锁定时长",
+        "billAmount": "账单金额",
+        "lockingTime": "锁定时间",
+        "start": "开始",
+        "finish": "结束",
+        "withdrawalIncome": "提取收益",
+        "redeemed": "已赎回",
+        "endBlockHeight": "结束块高",
+        "confirmRedeem": "确认赎回您的本金，一旦赎回将不再产生收益",
+        "cumulativeEarnedIncome": "累计赚取收益",
+        "withdrawableIncome": "可提取收益",
+        "timeOfPledge": "质押时间",
+        "lockupEndTime": "锁仓结束时间"
+    },
+    "webhooks": {
+        "clickToGoToBlockbrowserToView": "点击去区块浏览器查看",
+        "authorizationSucceeds": "授权成功",
+        "authorizationFailed": "授权失败",
+        "successfulPledge": "质押成功",
+        "failureOfPledge": "质押失败",
+        "successfulWithdrawalOfIncome": "提取收益成功",
+        "yieldFailure": "提取收益失败"
+    }
+}

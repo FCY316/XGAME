@@ -12,25 +12,29 @@ import useGetBalance from '@/web3Hooks/useGetBalance'
 import useGetUserHistoryBill from '@/web3Hooks/useGetUserHistoryBill'
 import { country } from '@/data'
 import Sample from '@/components/Sample'
-const tab = ['农场', '历史账单']
-const boClass = ['country_tab_bo', 'country_tab_bo right']
-// const cycleList = [
-//   { value: 0, label: '全部' },
-//   { value: 1, label: '500天线性释放' },
-//   { value: 2, label: '300天线性释放' },
-//   { value: 3, label: '300天' },
-// ]
-const typeList = [
-  { value: 0, label: '全部' },
-  { value: 1, label: '质押' },
-  { value: 2, label: '赎回' },
-]
-const options = ['进行中', '已结束']
+import { useTranslation } from 'react-i18next'
+
 const Country = () => {
+  // 翻译
+  const {t} = useTranslation()
+  const tab = [t('country.farm'), t('country.hob')]
+  const boClass = ['country_tab_bo', 'country_tab_bo right']
+  // const cycleList = [
+  //   { value: 0, label: '全部' },
+  //   { value: 1, label: '500天线性释放' },
+  //   { value: 2, label: '300天线性释放' },
+  //   { value: 3, label: '300天' },
+  // ]
+  const typeList = [
+    { value: 0, label: t('country.all') },
+    { value: 1, label: t('country.pledge') },
+    { value: 2, label: t('country.redeem') },
+  ]
+  const options = [t('country.underway'), t('country.finished')]
   // 提示
   const [api, contextHolder] = notification.useNotification();
   // tab选择选择的是农村还是历史账单
-  const [tabIndex, setTabIndex] = useState(1)
+  const [tabIndex, setTabIndex] = useState(0)
   // 判断是不是只显示我质押的
   const [showTime, setShowTime] = useState(false)
   // 锁仓周期
@@ -126,7 +130,7 @@ const Country = () => {
                   }}>
                   <Switch className='country_pledge_showTab_right_switch' defaultChecked={showTime} onChange={(checked) => { setShowTime(checked) }} />
                 </ConfigProvider>
-                <span>仅显示我质押的</span>
+                <span>{t('country.iPledgedIt')}</span>
               </div>
             </div>
             <div className='country_pledge_pool'>
@@ -167,7 +171,7 @@ const Country = () => {
                 />
               </div> */}
                 <div>
-                  <span>账单类型</span>
+                  <span>{t('country.billType')}</span>
                   <Select
                     style={{ color: "#3449A7" }}
                     dropdownStyle={{ textAlign: 'center', backgroundColor: "#EFF2FF" }}

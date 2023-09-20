@@ -97,11 +97,6 @@
       margin: auto;
       width: 280px;
       height: 32px;
-      background: linear-gradient(90deg, #6856f3 -6%, #3e58e1 109%);
-      box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-        0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-        inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
-        inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
     }
     &_btn2 {
       font-size: 14px;
@@ -123,13 +118,8 @@
       }
       &_t {
         border-radius: 8px;
-        background: linear-gradient(90deg, #6856f3 -6%, #3e58e1 109%);
         width: 130px;
         height: 32px;
-        box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-          0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-          inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
-          inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
       }
     }
     &_btn3 {
@@ -195,11 +185,6 @@
         display: block;
         margin: auto;
         height: 32px;
-        background: linear-gradient(90deg, #6856f3 -6%, #3e58e1 109%);
-        box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-          0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-          inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
-          inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
       }
     }
     &_context {
@@ -234,11 +219,6 @@
           display: block;
           margin: auto;
           height: 32px;
-          background: linear-gradient(90deg, #6856f3 -6%, #3e58e1 109%);
-          box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-            0px 0px 0px 0px rgba(255, 255, 255, 0.07),
-            inset 0px -3px 0px 1px rgba(0, 0, 0, 0.2),
-            inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
         }
       }
       &_info {
@@ -311,29 +291,30 @@
       padding-bottom: 0;
     }
     &_context {
-      padding: 20px ;
+      padding: 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      &_item{
+      &_item {
         padding-bottom: 0;
-        &_left{
-          min-width: 60px;
+        justify-content: flex-start;
+        &_left {
+          padding-right: 15px;
         }
-        &_right{
+        &_right {
           text-align: left;
-          span{
+          span {
             cursor: pointer;
           }
         }
       }
-      &_btn1{
+      &_btn1 {
         float: right;
         display: inline;
         width: 100px;
         margin: 0;
       }
-      &_block{
+      &_block {
         margin: 0;
         cursor: pointer;
       }

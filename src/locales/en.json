@@ -1,0 +1,76 @@
+{
+    "foot": {
+        "about": "About",
+        "whitePaper": "white paper",
+        "successfulReplication": "Successful replication",
+        "replicationFailure": "Replication failure"
+    },
+    "header": {
+        "home": "Home",
+        "game": "Game",
+        "farm": "Farm",
+        "connectedWallet": "Connected wallet",
+        "myWallet": "My Wallet",
+        "walletAddress": "Wallet Address",
+        "exitWallet": "Exit wallet"
+    },
+    "home": {
+        "hotGame": "Hot Game",
+        "viewMore": "More",
+        "farm": "Farm",
+        "explore": "Explore",
+        "partner": "Partner"
+    },
+    "game": {
+        "game": "Game",
+        "explore": "Explore"
+    },
+    "country": {
+        "farm": "Farm",
+        "hob": "Historical",
+        "all": "All",
+        "pledge": "Pledge ",
+        "redeem": "Redeem",
+        "underway": "Underway",
+        "finished": "Finished",
+        "iPledgedIt": "I pledged it",
+        "billType": "Type",
+        "TheAmountPledgedMustBeGreaterThan0": "The amount pledged must be greater than 0",
+        "theAmountPledgedIsGreaterThanTheBalance":"The amount pledged is greater than the balance",
+        "earn":"Earn ",
+        "earned":"Earned ",
+        "endCountdown":"End countdown",
+        "day":"day",
+        "alreadyOver":"already over",
+        "info":"info",
+        "startMining":"Start mining",
+        "startUsing":"Start using",
+        "viewTokenInformation":"View token information",
+        "viewContract":"View contract",
+        "balance":"Balance",
+        "lockupCycle":"Lockup cycle",
+        "overviewOfLockers":"Overview of lockers",
+        "lockDuration":"Lock duration",
+        "billAmount":"Amount",
+        "lockingTime":"Time",
+        "start":"Start",
+        "finish":"Finish",
+        "withdrawalIncome":"withdrawal",
+        "redeemed":"Redeemed",
+        "endBlockHeight":"End block height",
+        "confirmRedeem":"Confirm the redemption of your principal, once the redemption will no longer generate income",
+        "cumulativeEarnedIncome":"Cumulative earned income",
+        "withdrawableIncome":"Withdrawable income",
+        "timeOfPledge":"Time of pledge",
+        "lockupEndTime":"Lockup end time"
+    },
+    "webhooks":{
+        "clickToGoToBlockbrowserToView":"Click to go to Block browser to view",
+        "authorizationSucceeds":"Authorization succeeds",
+        "authorizationFailed":"Authorization failed",
+        "successfulPledge":"Successful pledge",
+        "failureOfPledge":"Failure of pledge",
+        "successfulWithdrawalOfIncome":"Successful withdrawal of income",
+        "yieldFailure":"Yield failure"
+    }
+}

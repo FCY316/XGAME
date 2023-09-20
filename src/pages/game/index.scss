@@ -33,7 +33,7 @@
 @media screen and (min-width: 780px) {
   .game {
     &_pc {
-      height: calc(100vh - 349px);
+      min-height: calc(100vh - 349px);
       width: 1200px;
       margin: auto;
     }

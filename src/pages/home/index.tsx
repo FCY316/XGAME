@@ -8,13 +8,15 @@ import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Carousels from "@/components/Carousels"
 import { hot, country } from '@/data'
+import { useTranslation } from "react-i18next"
 type slideshowItemType = {
   imgUrl: string,
   href: string
 }
 
 const Home = () => {
-
+  // 翻译
+  const { t } = useTranslation()
   // 初始化路由
   const navigate = useNavigate()
   return (
@@ -25,31 +27,31 @@ const Home = () => {
             <Carousels />
           </div>
           <div className="home_carousel_hot">
-            <div className="home_carousel_hot_title">🔥热门游戏</div>
+            <div className="home_carousel_hot_title">🔥{t('home.hotGame')}</div>
             <EmoCarousel></EmoCarousel>
-            <Button onClick={() => { navigate('/game') }} className="home_carousel_hot_btn" type="primary">查看更多</Button>
+            <Button onClick={() => { navigate('/game') }} className="home_carousel_hot_btn btn" type="primary">{t('home.viewMore')}</Button>
           </div>
         </div>
       </div>
       <div className="home_country">
         <div className="pc1200">
-        <div className="home_country_title">
-          <span>农场</span>
-          <img src={broccoli} alt="" />
-        </div>
-        <div className="home_country_banner">
-          <img src={country.imgUrl} alt="" />
-        </div>
-        <Button onClick={() => { navigate('/country') }} className="home_country_btn" type="primary">
-          <span>探索</span> <img src={rightarrow} alt="" />
-        </Button>
+          <div className="home_country_title">
+            <span>{t('home.farm')}</span>
+            <img src={broccoli} alt="" />
+          </div>
+          <div className="home_country_banner">
+            <img src={country.imgUrl} alt="" />
+          </div>
+          <Button onClick={() => { navigate('/country') }} className="home_country_btn btn" type="primary">
+            <span>{t('home.explore')}</span> <img src={rightarrow} alt="" />
+          </Button>
         </div>
       </div>
       <div className="home_bg">
         <div></div>
       </div>
       <div className="home_partner">
-        <div className="home_partner_title">合作伙伴</div>
+        <div className="home_partner_title"><span>{t('home.partner')}</span></div>
         <div className="home_partner_img">
           <img src={friday} alt="" />
           <img src={pay} alt="" />
@@ -67,7 +69,7 @@ const EmoCarousel = () => {
     return () => {
       window.open(url)
     }
-  }
+  } 
   useEffect(() => {
     setCls([...clsRef.current])
     const time = setInterval(() => {

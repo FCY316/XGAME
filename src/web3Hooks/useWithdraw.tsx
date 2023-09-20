@@ -2,14 +2,17 @@ import { useState } from "react";
 import useListenerTransfer from "./useListenerTransfer";
 import newContracts from "./useNewContract";
 import { parseUnits } from "@/utils";
+import { useTranslation } from "react-i18next";
 
 const useWithdraw = (api: any, pid: number, bid: number) => {
+    // 翻译
+    const { t } = useTranslation()
     // 拿到合约
     const { Pool } = newContracts.useContainer();
     // 获取监听事件成功的方法
     const listenerTransferF = useListenerTransfer()
     const [withdrawLod, setLoading] = useState(false)
-    const withdraw = async (amount:number) => {
+    const withdraw = async (amount: number) => {
         setLoading(true)
         try {
             if (Pool) {
@@ -18,20 +21,20 @@ const useWithdraw = (api: any, pid: number, bid: number) => {
                 const relset = await listenerTransferF(hash)
                 if (relset) {
                     api['success']({
-                        message: '提取收益成功',
+                        message: t('webhooks.successfulWithdrawalOfIncome'),
                         duration: 3,
                         description:
-                            '点击去区块浏览器查看',
+                            t('webhooks.clickToGoToBlockbrowserToView'),
                         onClick: () => {
                             window.open(`https://scan.fibochain.org/tx/${hash}`)
                         },
                     });
                 } else {
                     api['error']({
-                        message: '提取收益失败',
+                        message: t('webhooks.yieldFailure'),
                         duration: 3,
                         description:
-                            '点击去区块浏览器查看',
+                            t('webhooks.clickToGoToBlockbrowserToView'),
                         onClick: () => {
                             window.open(`https://scan.fibochain.org/tx/${hash}`)
                         },

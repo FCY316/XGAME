@@ -78,6 +78,7 @@ export function positiveNumAndLetter(str: string) {
   const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,6}$/;
   return reg.test(str);
 }
+// 正的数字或字母
 export function positiveNumOrLetter(str: string) {
   const reg = /^[0-9a-zA-Z]{6,6}$/;
   return reg.test(str);

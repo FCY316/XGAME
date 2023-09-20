@@ -3,9 +3,9 @@ import downarrow from '@/image/downarrow.png'
 import href2 from '@/image/href2.png'
 import scan from '@/image/scan.png'
 import closeIcon from '@/image/closeIcon.png'
-import { Button, ConfigProvider, Drawer, Input, Popover, Slider, Spin, message } from 'antd'
+import { Button, ConfigProvider, Drawer, DrawerProps, Input, Popover, Slider, Spin, message } from 'antd'
 import { formatNumber, formatUnits } from '@/utils'
-import { ChangeEvent, useCallback, useState } from 'react'
+import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { SliderMarks } from 'antd/es/slider'
 import usePoolInfo from '@/web3Hooks/usePoolInfo'
 import usePoolAmount from '@/web3Hooks/usePoolAmount'
@@ -14,7 +14,8 @@ import { logoList, tokenAddress } from '@/abi/tokenAddress'
 import useGetblock from '@/web3Hooks/useGetblock'
 import useUserActivationPool from '@/web3Hooks/useUserActivationPool'
 import useDeposit from '@/web3Hooks/useDeposit'
-import { price } from '@/abi/tokenAddress'
+import { useTranslation } from 'react-i18next'
+import useGetAmountsOut from '@/web3Hooks/useGetAmountsOut'
 const marks: SliderMarks = {
     0: '0%',
     25: '25%',
@@ -38,6 +39,8 @@ const marks: SliderMarks = {
 */
 const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setUsedBalance: Function, showTime: boolean, timeState: number, id: number, approve: Function, approveLod: boolean, limit: number, usedLimit: boolean, setUsedLimit: Function }) => {
     const { api, showTime, id, approve, approveLod, limit, usedLimit, setUsedLimit, timeState, balance, usedBalance, setUsedBalance } = props
+    // 翻译 
+    const { t } = useTranslation()
     const [messageApi, contextHolder] = message.useMessage();
     // 控制侧边栏的参数
     const [open, setOpen] = useState(false);
@@ -51,6 +54,10 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
             window.open(url)
         }
     }
+    // 获取该项目的币价
+    const {price,usedPrice} = useGetAmountsOut()
+    // 页面的弹窗出现的位置
+    const [placement, setPlacement] = useState<DrawerProps['placement']>('bottom')
     // 打开侧边栏
     const showDrawer = () => {
         setOpen(true);
@@ -96,14 +103,14 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
             // 获取ARB price
             let arb = 0
             // poolAmount必须是数字，且不等于0 ，等于0算出的结果是无穷大
-            if (poolInfo && poolAmount) {
+            if (poolInfo && poolAmount && price) {
                 arb = (formatUnits(poolInfo.totalRewards) * price.FIBO) / (timeQuantum * 360) / poolAmount * price.AWW
                 arb = (arb / 100)
             }
             const tvl = poolAmount ? poolAmount * price.AWW : 0
             return { name, arb, blockTime, timeQuantum, tvl }
         }
-    }, [poolInfo, block, poolAmount])
+    }, [poolInfo, block, poolAmount, price])
     // 刷新数据的方法
     const update = () => {
         setUsedPoolInfo()
@@ -128,8 +135,8 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
     // 质押
     const depositF = async () => {
         setNum(Number(num) + '')
-        if (Number(num) <= 0) return messageApi.warning('质押金额需要大于0');
-        else if (Number(num) > balance) return messageApi.warning('质押金额大于余额');
+        if (Number(num) <= 0) return messageApi.warning(t('country.theAmountPledgedMustBeGreaterThan0'));
+        else if (Number(num) > balance) return messageApi.warning(t('country.theAmountPledgedIsGreaterThanTheBalance'));
         // 判断用户额度是否大于质押的参数 是的话授权，不是的话质押
         if (Number(num) > limit) {
             await approve()
@@ -188,6 +195,15 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
             }
         }
     }
+    // 监听页面的宽度，用于热门DAO弹窗展示的位置
+    useEffect(() => {
+        window.innerWidth >= 780 ? setPlacement('right') : setPlacement('bottom')
+        window.addEventListener('resize', () => {
+            const pageWidth = window.innerWidth;
+            // 当页面大于或等于780的时候，弹窗为right
+            pageWidth >= 780 ? setPlacement('right') : setPlacement('bottom')
+        });
+    }, [])
     return (
         <>
             {
@@ -200,20 +216,20 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
                                 <img src={logoList[setPoolInfo()?.name[0] || 'Fibo']} alt="" />
                             </div>
                             <div className='poolItem_tokenInfo_left_text'>
-                                <div>赚取{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[1]}</div>
-                                <div>质押{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[0]}</div>
+                                <div>{t('country.earn')}{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[1]}</div>
+                                <div>{t('country.pledge')}{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[0]}</div>
                             </div>
                         </div>
                         <div className='poolItem_tokenInfo_right'>
                             APR：
                             <Popover content={setPoolInfo()?.arb}>
-                                <span> {(usedPoolInfo && usedAmount) ? <Spin /> : formatNumber(setPoolInfo()?.arb || 0)}%</span>
+                                <span> {(usedPoolInfo && usedAmount && usedPrice) ? <Spin /> : formatNumber(setPoolInfo()?.arb || 0)}%</span>
                             </Popover>
                         </div>
                     </div>
                     <div className='poolItem_earnings'>
                         <div>
-                            <div>已赚取{setPoolInfo()?.name[1]}</div>
+                            <div>{t('country.earned')}{setPoolInfo()?.name[1]}</div>
                             <div>
                                 <Popover content={userReward}>
                                     {usedPoolReward ? <Spin /> : formatNumber(userReward || 0)}
@@ -229,26 +245,26 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
                             </div>
                         </div>
                         <div>
-                            <div>结束倒计时</div>
+                            <div>{t('country.endCountdown')}</div>
                             <div>
                                 {overBlock() ? <Popover content={`${setPoolInfo()?.blockTime}天`}>
-                                    {(usedBlock || usedPoolInfo || usedAmount) ? <Spin /> : setPoolInfo()?.blockTime}天
-                                </Popover> : '已经结束'}
+                                    {(usedBlock || usedPoolInfo || usedAmount) ? <Spin /> : setPoolInfo()?.blockTime}{t('country.day')}
+                                </Popover> : t('country.alreadyOver')}
                             </div>
                         </div>
                     </div>
                     <div className={show ? 'poolItem_unfold bg' : 'poolItem_unfold'} onClick={() => { setShow(!show) }}>
-                        <span>详情</span>
+                        <span>{t('country.info')}</span>
                         <img className={show ? 'img180' : ''} src={downarrow} alt="" />
                     </div>
                     <div className={show ? 'poolItem_info hauto' : 'poolItem_info'}>
                         <div className='poolItem_info_start'>
-                            <p>开始挖矿</p>
-                            <Button disabled={!overBlock()} loading={usedLimit || approveLod} onClick={approveF} className='poolItem_info_start_btn' type="primary">{limit ? '质押' : '启用'}</Button>
+                            <p>{t('country.startMining')}</p>
+                            <Button disabled={!overBlock()} loading={usedLimit || approveLod} onClick={approveF} className='poolItem_info_start_btn btn' type="primary">{limit ? t('country.pledge') : t('country.startUsing')}</Button>
                         </div>
                         <div className='poolItem_info_token'>
-                            <p><span onClick={go(`https://scan.fibochain.org/address/${tokenAddress[setPoolInfo()?.name[1] || 'WFIBO']}`)}>查看代币信息</span> <img src={href2} alt="" /></p>
-                            <p><span onClick={go(`https://scan.fibochain.org/address/${poolInfo?.rewardToken}`)}>查看合约</span> <img src={scan} alt="" /></p>
+                            <p><span onClick={go(`https://scan.fibochain.org/address/${tokenAddress[setPoolInfo()?.name[1] || 'FIBO']}`)}>{t('country.viewTokenInformation')}</span> <img src={href2} alt="" /></p>
+                            <p><span onClick={go(`https://scan.fibochain.org/address/${poolInfo?.rewardToken}`)}>{t('country.viewContract')}</span> <img src={scan} alt="" /></p>
                         </div>
                     </div>
                     <ConfigProvider
@@ -271,14 +287,15 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
                         }}>
                         <Drawer
                             className='poolItem_drawer'
-                            placement={'bottom'}
+                            placement={placement}
                             height={'80%'}
+                            width={'500px'}
                             onClose={onClose}
                             closeIcon={null}
                             open={open}
                             title={
                                 <div className='poolItem_drawer_title'>
-                                    质押{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[0]}赚取{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[1]}
+                                    {t('country.pledge')}{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[0]}{t('country.earn')}{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[1]}
                                     <img
                                         onClick={onClose}
                                         src={closeIcon}
@@ -289,12 +306,12 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
                         >
                             <div className='poolItem_drawer_token'>
                                 <div className='poolItem_drawer_token_left'>
-                                    <span>质押:</span>
+                                    <span>{t('country.pledge')}:</span>
                                     <img src={logoList[setPoolInfo()?.name[0] || 'Fibo']} alt="" />
                                     <span>{usedPoolInfo ? <Spin /> : setPoolInfo()?.name[0]}</span>
                                 </div>
                                 <div className='poolItem_drawer_token_right'>
-                                    <span>余额：</span>
+                                    <span>{t('country.balance')}：</span>
                                     <span> <Popover placement="left" content={`$${balance}`}>
                                         {usedBalance ? <Spin /> : formatNumber(balance)}
                                     </Popover></span>
@@ -311,25 +328,26 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
                                 trackStyle={{ background: "#EFF2FF" }}
                                 className='poolItem_drawer_slider' marks={marks} defaultValue={0} />
                             <div className='poolItem_drawer_period'>
-                                <div>锁仓周期：</div>
+                                <div>{t('country.lockupCycle')}：</div>
                                 <div><span>{usedPoolInfo ? <Spin /> : setPoolInfo()?.timeQuantum}</span>天</div>
                             </div>
                             <div className='poolItem_drawer_info'>
                                 <p className='poolItem_drawer_info_title'>
-                                    锁仓概览
+                                    {t('country.overviewOfLockers')}
                                 </p>
                                 <div className='poolItem_drawer_info_context'>
                                     <div>
                                         <div>APR</div>
-                                        <div>{(usedPoolInfo && usedAmount) ? <Spin /> : formatNumber(setPoolInfo()?.arb || 0)}%</div>
+                                        <div>{(usedPoolInfo && usedAmount && usedPrice) ? <Spin /> : formatNumber(setPoolInfo()?.arb || 0)}%</div>
                                     </div>
                                     <div>
-                                        <div>锁定时长</div>
-                                        <div>{usedPoolInfo ? <Spin /> : setPoolInfo()?.timeQuantum} 天</div>
+                                        <div>{t('country.lockDuration')}                                    {t('country.overviewOfLockers')}
+                                        </div>
+                                        <div>{usedPoolInfo ? <Spin /> : setPoolInfo()?.timeQuantum} {t('country.day')}</div>
                                     </div>
                                 </div>
                             </div>
-                            <Button loading={depositLod} onClick={depositF} className='poolItem_drawer_btn' type="primary">质押</Button>
+                            <Button loading={depositLod} onClick={depositF} className='poolItem_drawer_btn btn' type="primary"> {t('country.pledge')}</Button>
 
                         </Drawer>
                     </ConfigProvider>

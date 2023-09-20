@@ -1,5 +1,4 @@
 import './index.scss'
-
 import close3 from '@/image/close3.png'
 import jt from '@/image/jt.png'
 import { Button, Modal, Popover, Spin } from 'antd'
@@ -10,10 +9,13 @@ import useWithdraw from '@/web3Hooks/useWithdraw'
 import usePending from '@/web3Hooks/usePending'
 import useGetblock from '@/web3Hooks/useGetblock'
 import { logoList } from '@/abi/tokenAddress'
+import { useTranslation } from 'react-i18next'
 
 const Bill = (props: { type: number, item: any, api: any, setUsedHistoryt: Function }) => {
     const { item, api, setUsedHistoryt, type } = props
-    // 1 提取 2提取 赎回 3赎回
+    // 翻译
+    const { t } = useTranslation()
+    // 0 提取 1提取 赎回 2赎回
     const [state, setState] = useState(0)
     // 获取池子的信息
     const { poolInfo } = usePoolInfo(Number(item.pid))
@@ -106,13 +108,13 @@ const Bill = (props: { type: number, item: any, api: any, setUsedHistoryt: Funct
                             <img src={logoList[setPoolInfo()?.name[0] || 'Fibo']} alt="" />
                         </div>
                         <div className='bill_top_text'>
-                            <div>赚取{setPoolInfo()?.name[1]}</div>
-                            <div>质押{setPoolInfo()?.name[0]}</div>
+                            <div>{t('country.earn')}{setPoolInfo()?.name[1]}</div>
+                            <div>{t('country.pledge')}{setPoolInfo()?.name[0]}</div>
                         </div>
                     </div>
                     <div className='bill_context'>
                         <div className='bill_context_item'>
-                            <div className='bill_context_item_left'>账单金额</div>
+                            <div className='bill_context_item_left'>{t('country.billAmount')}</div>
                             <div className='bill_context_item_right'>
                                 <Popover content={formatUnits(item.amount)}>
                                     {formatNumber(formatUnits(item.amount))}{setPoolInfo()?.name[0]}
@@ -120,29 +122,29 @@ const Bill = (props: { type: number, item: any, api: any, setUsedHistoryt: Funct
                             </div>
                         </div>
                         <div className='bill_context_item'>
-                            <div className='bill_context_item_left'>锁仓周期</div>
-                            <div className='bill_context_item_right'><span>{setPoolInfo()?.timeQuantum}天</span></div>
+                            <div className='bill_context_item_left'>{t('country.lockupCycle')}</div>
+                            <div className='bill_context_item_right'><span>{setPoolInfo()?.timeQuantum}{t('country.day')}</span></div>
                         </div>
                         <div className='bill_context_item'>
-                            <div className='bill_context_item_left'>账单类型</div>
-                            <div className='bill_context_item_right'><span>{state <= 1 ? '质押' : '赎回'}</span></div>
+                            <div className='bill_context_item_left'>{t('country.billType')}</div>
+                            <div className='bill_context_item_right'><span>{state <= 1 ? t('country.pledge') : t('country.redeem')}</span></div>
                         </div>
                         <div className='bill_context_item'>
-                            <div className='bill_context_item_left'>锁定时间</div>
+                            <div className='bill_context_item_left'>{t('country.lockingTime')}</div>
                             <div className='bill_context_item_right'>
-                                <div>开始：<span>{formatTimeToStr(formatUnits(item.lockStartTime, 0) * 1000, '.')}</span></div>
-                                <div>结束：<span>{formatTimeToStr2((formatUnits(item.lockStartTime, 0) * 1000 + (setPoolInfo()?.blockTime || 0)), '.')}</span></div>
+                                <div>{t('country.start')}：<span>{formatTimeToStr(formatUnits(item.lockStartTime, 0) * 1000, '.')}</span></div>
+                                <div>{t('country.finish')}：<span>{formatTimeToStr2((formatUnits(item.lockStartTime, 0) * 1000 + (setPoolInfo()?.blockTime || 0)), '.')}</span></div>
                             </div>
                         </div>
-                        {state === 0 && <Button onClick={showModalT} className='bill_context_btn1' type="primary">提取收益</Button>}
+                        {state === 0 && <Button onClick={showModalT} className='bill_context_btn1 btn' type="primary">{t('country.withdrawalIncome')} </Button>}
                         {state === 1 && <div className='bill_context_btn2'>
-                            <Button onClick={showModal} className='bill_context_btn2_s' type="primary">赎回</Button>
-                            <Button onClick={showModalT} className='bill_context_btn2_t' type="primary">提取收益</Button>
+                            <Button onClick={showModal} className='bill_context_btn2_s' type="primary">{t('country.redeem')}</Button>
+                            <Button onClick={showModalT} className='bill_context_btn2_t btn' type="primary">{t('country.withdrawalIncome')}</Button>
                         </div>}
-                        {state === 2 && <div  className='bill_context_btn3'>已赎回</div>}
+                        {state === 2 && <div className='bill_context_btn3'>{t('country.redeemed')}</div>}
                         <div className='bill_context_block' onClick={() => {
                             window.open('https://scan.fibochain.org/blocks')
-                        }} > 结束块高：{poolInfo && formatUnits(poolInfo.startBlock, 0) + formatUnits(poolInfo.totalBlock, 0)}</div>
+                        }} >{t('country.endBlockHeight')} ：{poolInfo && formatUnits(poolInfo.startBlock, 0) + formatUnits(poolInfo.totalBlock, 0)}</div>
                     </div>
                     <Modal open={isModalOpen} onOk={handleCancel}
                         onCancel={handleCancel}
@@ -152,12 +154,12 @@ const Bill = (props: { type: number, item: any, api: any, setUsedHistoryt: Funct
                             return <div className="bill_Modal">{modal}</div>;
                         }}>
                         <div className='bill_Modal_title'>
-                            赎回
+                            {t('country.redeem')}
                         </div>
                         <img onClick={handleCancel} className='bill_Modal_close' src={close3} alt="" />
-                        <p className='bill_Modal_text'>确认赎回您的本金，一旦赎回将不再产生收益</p>
+                        <p className='bill_Modal_text'>{t('country.confirmRedeem')}</p>
                         <div className='bill_Modal_btn'>
-                            <Button loading={withdrawLod} onClick={() => { extracting(formatUnits(item.amount)) }} className='bill_Modal_btn_btn' type="primary">赎回</Button>
+                            <Button loading={withdrawLod} onClick={() => { extracting(formatUnits(item.amount)) }} className='bill_Modal_btn_btn btn' type="primary">{t('country.redeem')}</Button>
                         </div>
                     </Modal>
                     <Modal open={isModalOpenT} onOk={handleCancelT}
@@ -168,12 +170,12 @@ const Bill = (props: { type: number, item: any, api: any, setUsedHistoryt: Funct
                             return <div className="bill_Modal">{modal}</div>;
                         }}>
                         <div className='bill_Modal_title'>
-                            提取收益
+                            {t('country.withdrawalIncome')}
                         </div>
                         <img onClick={handleCancelT} className='bill_Modal_close' src={close3} alt="" />
                         <div className='bill_Modal_context'>
                             <div className='bill_Modal_context_item'>
-                                <div className='bill_Modal_context_item_left'>累计赚取收益</div>
+                                <div className='bill_Modal_context_item_left'>{t('country.cumulativeEarnedIncome')}</div>
                                 <div className='bill_Modal_context_item_right'>
                                     <Popover content={formatUnits(item.historyRewardValue)}>
                                         {formatNumber(formatUnits(item.historyRewardValue))}{setPoolInfo()?.name[1]}
@@ -181,7 +183,7 @@ const Bill = (props: { type: number, item: any, api: any, setUsedHistoryt: Funct
                                 </div>
                             </div>
                             <div className='bill_Modal_context_item'>
-                                <div className='bill_Modal_context_item_left'>可提取收益</div>
+                                <div className='bill_Modal_context_item_left'>{t('country.withdrawableIncome')}</div>
                                 <div className='bill_Modal_context_item_right'>
                                     <Popover content={usedPending ? <Spin /> : (pending || 0)}>
                                         {usedPending ? <Spin /> : formatNumber(pending || 0)}{setPoolInfo()?.name[1]}
@@ -190,20 +192,20 @@ const Bill = (props: { type: number, item: any, api: any, setUsedHistoryt: Funct
                                 </div>
                             </div>
                             <div className='bill_Modal_context_btn2'>
-                                <Button onClick={() => { extracting(0) }} loading={withdrawLod} className='bill_Modal_context_btn2_btn' type="primary">提取收益</Button>
+                                <Button onClick={() => { extracting(0) }} loading={withdrawLod} className='bill_Modal_context_btn2_btn btn' type="primary">{t('country.withdrawalIncome')}</Button>
                             </div>
                             <div className='bill_Modal_context_info'>
                                 <div className="bill_Modal_context_info_unfold" onClick={() => { setShow(!show) }}>
-                                    <span>详情</span>
+                                    <span>{t('country.info')}</span>
                                     <img className={show ? 'img180' : ''} src={jt} alt="" />
                                 </div>
                                 <div className={show ? 'bill_Modal_context_info_text' : 'bill_Modal_context_info_text h0'}>
                                     <div>
-                                        <div>质押时间</div>
+                                        <div>{t('country.timeOfPledge')}</div>
                                         <div>{formatTimeToStr(formatUnits(item.lockStartTime, 0) * 1000, '.')}</div>
                                     </div>
                                     <div>
-                                        <div>锁仓结束时间</div>
+                                        <div>{t('country.lockupEndTime')}</div>
                                         <div>{formatTimeToStr2((formatUnits(item.lockStartTime, 0) * 1000 + (setPoolInfo()?.blockTime || 0)), '.')}</div>
                                     </div>
                                 </div>

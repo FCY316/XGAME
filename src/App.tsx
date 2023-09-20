@@ -12,10 +12,6 @@ function App() {
       <ConfigProvider
         theme={{
           components: {
-            Button: {
-              colorPrimary: '#2901E8',
-              algorithm: true, // 启用算法
-            },
             Modal: {
               contentBg: 'transparency',
               boxShadow: '0 6px 16px 0 transparency, 0 3px 6px -4px transparency, 0 9px 28px 8px transparency ',

@@ -3,8 +3,11 @@ import { MaxUint256 } from "@/utils";
 import contract from "@/abi";
 import useListenerTransfer from "./useListenerTransfer";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const useApprove = (api: any) => {
+    // 翻译
+    const { t } = useTranslation()
     // 拿到合约
     const { erc20 } = newContracts.useContainer();
     // 获取监听事件成功的方法
@@ -18,20 +21,20 @@ const useApprove = (api: any) => {
                 const relset = await listenerTransferF(hash)
                 if (relset) {
                     api['success']({
-                        message: '授权成功',
+                        message: t('webhooks.authorizationSucceeds'),
                         duration: 3,
                         description:
-                            '点击去区块浏览器查看',
+                            t('webhooks.clickToGoToBlockbrowserToView'),
                         onClick: () => {
                             window.open(`https://scan.fibochain.org/tx/${hash}`)
                         },
                     });
                 } else {
                     api['error']({
-                        message: '授权失败',
+                        message: t('webhooks.authorizationFailed'),
                         duration: 3,
                         description:
-                            '点击去区块浏览器查看',
+                            t('webhooks.clickToGoToBlockbrowserToView'),
                         onClick: () => {
                             window.open(`https://scan.fibochain.org/tx/${hash}`)
                         },

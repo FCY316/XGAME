@@ -25,6 +25,9 @@
         }
         &:last-child {
           padding: 0;
+          &:hover{
+            color: #5E56EE;
+          }
         }
       }
     }
@@ -40,6 +43,9 @@
       justify-content: space-between;
       box-sizing: border-box;
       padding: 0 12px 0 14px;
+      &:hover{
+        background-color: #403C6D;
+      }
       img {
         width: 16px;
         height: 16px;
@@ -58,7 +64,7 @@
     div {
       width: 38px;
       height: 38px;
-      background: #7c7c7c;
+      background: rgba(124, 124, 124, 0.44);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -69,7 +75,7 @@
       }
     }
     div:hover {
-      background: #0057fb;
+      background: #5E56EE;
     }
     &_T {
       width: 17px;

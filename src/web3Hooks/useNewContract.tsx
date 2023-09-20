@@ -9,11 +9,12 @@ type objKeyObjectType = {
 type walletType = {
     Pool: Contract | null,
     erc20: Contract | null,
-
+    UniswapV2Pair: Contract | null
 }
 const initialState: walletType = {
     Pool: null,
-    erc20: null
+    erc20: null,
+    UniswapV2Pair: null
 }
 // new出合约，
 const useNewContract = (props = initialState) => {
