@@ -103,9 +103,8 @@ const PoolItem = (props: { api: any, balance: number, usedBalance: boolean, setU
             // 获取ARB price
             let arb = 0
             // poolAmount必须是数字，且不等于0 ，等于0算出的结果是无穷大
-            if (poolInfo && poolAmount && price) {
-                arb = (formatUnits(poolInfo.totalRewards) * price.FIBO) / (timeQuantum * 360) / poolAmount * price.AWW
-                arb = (arb / 100)
+            if (poolInfo && poolAmount) {
+                arb = (formatUnits(poolInfo.totalRewards) * price.FIBO / timeQuantum * 360) /( poolAmount * price.AWW)*100
             }
             const tvl = poolAmount ? poolAmount * price.AWW : 0
             return { name, arb, blockTime, timeQuantum, tvl }

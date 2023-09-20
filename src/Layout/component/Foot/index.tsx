@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
 import logo from '@/image/logo.png'
-import language from '@/image/language.png'
+import languages from '@/image/language.png'
 import uparrow from '@/image/uparrow.png'
 import T from '@/image/T.png'
 import F from '@/image/F.png'
@@ -9,6 +8,7 @@ import D from '@/image/D.png'
 import './index.scss'
 import { Dropdown, MenuProps } from 'antd'
 import { useTranslation } from 'react-i18next'
+import changeLocalStorage from '@/hooks/useChangeLocalStorage'
 const items: MenuProps['items'] = [
   {
     key: 'cn',
@@ -20,7 +20,7 @@ const items: MenuProps['items'] = [
 ];
 const Foot = () => {
   // 选择的语言
-  const [languages,setLanguage] = useState('中文')
+  const { language, changeLanguage } = changeLocalStorage.useContainer()
   // 翻译
   const { t, i18n } = useTranslation();
   // 跳转
@@ -32,8 +32,7 @@ const Foot = () => {
   // 中英文
   const onClick: MenuProps['onClick'] = ({ key }) => {
     i18n.changeLanguage(key)
-    const data = key === 'cn' ? '中文':'英文'
-    setLanguage(data)
+    changeLanguage(key)
   };
   return (
     <div className='foot'>
@@ -44,14 +43,14 @@ const Foot = () => {
         <div className='foot_link_left'>
           <div>{t('foot.about')}</div>
           <div
-            onClick={href('https://docs.google.com/document/d/1eJRUiPl5IoJdqJ6dNzByf_N3upqx2wWxO__hofz2-yo/edit')}>{t('foot.whitePaper')}</div>
+            onClick={href(language === 'cn' ? 'https://docs.google.com/document/d/1eJRUiPl5IoJdqJ6dNzByf_N3upqx2wWxO__hofz2-yo/edit' : "dsa")}>{t('foot.whitePaper')}</div>
 
         </div>
 
         <Dropdown overlayClassName={'foot_link_right_item'} arrow={{ pointAtCenter: true }} menu={{ items, onClick }} placement="top" trigger={['click']}>
           <div className='foot_link_right'>
-            <img src={language} alt="" />
-            <span>{languages}</span>
+            <img src={languages} alt="" />
+            <span>{language === 'cn' ? '中文' : '英文'}</span>
             <img src={uparrow} alt="" />
           </div>
         </Dropdown>
